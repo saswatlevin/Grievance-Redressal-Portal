@@ -83,7 +83,6 @@ CREATE TABLE outlets (
 	chain_id BIGINT
 );
 
-
 ALTER TABLE posts 
 ADD CONSTRAINT fk_post_user 
 FOREIGN KEY (user_id) REFERENCES users(user_id)
@@ -119,6 +118,24 @@ ADD CONSTRAINT fk_user_outlet
 FOREIGN KEY(outlet_id) REFERENCES outlets(outlet_id)
 ON DELETE SET NULL;
 
+-- user_id, user_date_created_at, user_first_name, user_last_name, user_password, user_email, user_dob, user_role, user_address_room_no, user_address_building, user_address_street, user_address_city, user_address_admin_division, user_address_country, user_address_post_code, user_mobile_no, user_is_moderator
+
+INSERT INTO  users (user_date_created_at, user_first_name, user_last_name, user_password, user_email, user_dob, user_role, user_address_room_no, user_address_building, user_address_street, user_address_city, user_address_admin_division, user_address_country, user_address_post_code, user_mobile_no, user_is_moderator) (NOW(), "ABCFname", "ABCLname", "abc@123pwd00", "abc@server.com", "restaurant_employee", "Apartment 1204", "Marina Heights", "Dubai Marina", "Dubai", "Dubai", "United Arab Emirates", "000000", "971501234567");
+
+INSERT INTO  users (user_date_created_at, user_first_name, user_last_name, user_password, user_email, user_dob, user_role, user_address_room_no, user_address_building, user_address_street, user_address_city, user_address_admin_division, user_address_country, user_address_post_code, user_mobile_no, user_is_moderator) (NOW(), "DEFFname", "DEFLname", "defc@256pwd11", "def@server.com", "restaurant_manager", "Villa 18", "Al Bateen", "Al Khaleej Al Arabi Street", "Abu Dhabi", "Abu Dhabi", "United Arab Emirates", "000000", "971522345678");
+
+INSERT INTO  users (user_date_created_at, user_first_name, user_last_name, user_password, user_email, user_dob, user_role, user_address_room_no, user_address_building, user_address_street, user_address_city, user_address_admin_division, user_address_country, user_address_post_code, user_mobile_no, user_is_moderator) (NOW(), "GHIFname", "GHILname", "ghi@267pwd00", "ghi@server.com", "company_employee", "Apartment 704", "Al Qasimia Tower", "Al Qasimia", "Sharjah", "Sharjah", "United Arab Emirates", "000000", "971543456789");
+
+INSERT INTO  users (user_date_created_at, user_first_name, user_last_name, user_password, user_email, user_dob, user_role, user_address_room_no, user_address_building, user_address_street, user_address_city, user_address_admin_division, user_address_country, user_address_post_code, user_mobile_no, user_is_moderator) (NOW(), "GHIFname", "GHILname", "ghi@267pwd00", "ghi@server.com", "company_manager", "Apartment 704", "Al Qasimia Tower", "Al Qasimia", "Sharjah", "Sharjah", "United Arab Emirates", "000000", "971543456789");
+
+INSERT INTO  users (user_date_created_at, user_first_name, user_last_name, user_password, user_email, user_dob, user_role, user_address_room_no, user_address_building, user_address_street, user_address_city, user_address_admin_division, user_address_country, user_address_post_code, user_mobile_no, user_is_moderator) (NOW(), "JKLFname", "JKLLname", "jkl@193pwdn1", "jkl@server.com", "restaurant_employee", "Apartment 305", "Al Nuaimiya Tower", "Al Nuaimiya", "Ajman", "Ajman", "United Arab Emirates", "000000", "971554567890");
+
+INSERT INTO  users (user_date_created_at, user_first_name, user_last_name, user_password, user_email, user_dob, user_role, user_address_room_no, user_address_building, user_address_street, user_address_city, user_address_admin_division, user_address_country, user_address_post_code, user_mobile_no, user_is_moderator) (NOW(), "MNOFname", "MNOLname", "mno@401pwd31", "mno@server.com", "restaurant_manager", "Villa 27", "Al Muwaiji", "Al Muwaiji", "Al-Ain", "Al-Ain", "United Arab Emirates", "000000", "971565678901");
+
+INSERT INTO  users (user_date_created_at, user_first_name, user_last_name, user_password, user_email, user_dob, user_role, user_address_room_no, user_address_building, user_address_street, user_address_city, user_address_admin_division, user_address_country, user_address_post_code, user_mobile_no, user_is_moderator) (NOW(), "STUFname", "STULname", "stu@114pwd06", "stu@server.com", "restaurant_employee", "", "Building 2847", "King Abdul Aziz Road", "Riyadh", "Al-Malaz District", "Saudi Arabia", "12836", "966501234567");
+
+
+INSERT INTO chains (chain_date_created_at, chain_name, chain_headquarters_address_room_no, chain_headquarters_address_building, chain_headquarters_address_street, chain_headquarters_address_city, chain_headquarters_address_admin_division, chain_headquarters_address_country, chain_headquarters_address_post_code) 
 
 /**
 OUTLETS - USERS (0:1 - 1:N) A given outlet may have 1 or N users. A given user can belong to only 1 outlet or no outlet. When we delete an OUTLET, then the outlet_id in the respective USER should be made NULL.
