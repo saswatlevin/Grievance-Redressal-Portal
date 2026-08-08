@@ -1,0 +1,33 @@
+ANSWER to Q1 of WEEK3 OnlineWorkshop
+The Answer is E: More than one statement is TRUE
+
+ANSWER to Q2 of WEEK3 OnlineWorkshop
+The Answer is D: A, B and C. This is because A -> (empno, empname, empsalary, emptaxfilenno), B -> (empno) and C -> (emptaxfileno, empname) are combinations of Attributes in which each tuple will have unique data, i.e., exhibit the uniqueness property, i.e., Super Keys.
+
+ANSWER to Q3 of WEEK3 OnlineWorkshop
+The Answer is C: 2. This is because B -> (empno) and C -> (emptaxfileno, empname) are minimal Super Keys.
+
+ANSWER to Q4 of WEEK3 OnlineWorkshop
+The Answer is B: 1. This is because each relation can have only 1 PRIMARY_KEY.
+
+ANSWER to Q5 of WEEK3 OnlineWorkshop
+The Answer is D: PROJECT table using project_manager attribute. This is because the MANAGER - PROJECT relationship is 1:N, so the PRIMARY_KEY of the one side is going to be included as the FOREIGN_KEY of the N side.
+
+ANSWER to Q6 of WEEK3 OnlineWorkshop
+The Answer is E: More than one answer is correct. This is because there are 2 FOREIGN_KEYS here: dept_id in STAFF relation and supervisor_id in STAFF relation. dept_id is a FOREIGN_KEY since it is the PRIMARY_KEY of the DEPARTMENT relation and supervisor_id is a FOREIGN_KEY since it just the staff_id but under a different attribute name.
+
+ANSWER to Q7 of WEEK3 OnlineWorkshop
+The Answer is D: The options a and b. This is because the correct actions are: "DELETING the last row of the PROJECT_MANAGER table." AND "The PROJECT_MANAGER value in the last row of the PROJECT table should be set to NULL." as this satisfies data integrity.
+
+ANSWER to Q8 of WEEK3 OnlineWorkshop
+The Answer is E: π stude (σ mark > 70 AND subj = 1011 (MARK))  
+PI <stude> (SIGMA <mark> >= 70 AND <subject> = 1011) 
+
+ANSWER to Q9 of WEEK3 OnlineWorkshop
+The Answer is A: 24. This is because the STUDENT relation has 4 rows and the MARK relation has 6 rows and cartesian product between them would result in 4  * 6 = 24 rows.
+
+ANSWER to Q10 of WEEK3 OnlineWorkshop
+The Answer is B: 6. This is because the STUDENT relation has 3 attributes and the MARK relation has 3 attributes. So, 3 + 3 = 6 columns.
+
+ANSWER to Q11 of WEEK3 OnlineWorkshop
+The Answer is B:  π course, name, sid, subj, mark (σ sid = stude(STUDENT X MARK)). This is because, the CROSS PRODUCT is done FIRST, then rows where studid != stude are removed SECOND and then duplicate rows and columns are removed THIRD trough Projection.

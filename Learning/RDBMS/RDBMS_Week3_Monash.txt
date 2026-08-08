@@ -1,0 +1,152 @@
+===================WEEK 03 LECTURE===================
+DOMAIN -> Set of Atomic values (name, data_type, data_format)
+Eg -  customer_number domain - 5 character string of the form xxxdd
+
+A RELATION has a HEADING (Schema) and a BODY.
+Eg - CUSTOMER (custno, custname, custadd, credlimit)
+ 
+The Heading is a set of attributes.
+Each of these attributes has its own domain.
+Eg - dom(custno) = customer_number
+
+The RELATION HEADING is represented by the table header (Column names).
+Each row in the RELATION BODY is a Tuple.
+The RELATION BODY is a Set of Tuples.
+
+A Relation has no duplicate tuples. 
+The tuples in it are unordered. 
+The attributes within a tuple are also unordered. 
+Each value in a tuple is atomic -> It can't be divided further.
+
+FUNCTIONAL DEPENDENCY -> A set of attributes A functionally determines an attribute B if, and only if, 
+for each A value, there is exactly one value of B in the relation. It is 
+denoted as A  → B
+
+RELATIONAL MODEL KEYS ->
+ * A SUPER_KEY of a relation R is an attribute or set of attributes which exhibits only the uniqueness property.
+ * No two tuples of R have the same value for the Super key (Uniqueness property)
+ * t1[superkey] ≠ t2[superkey] 
+
+ A CANDIDATE_KEY of a relation R is an attribute or set of attributes which exhibits the following properties:
+   * Uniqueness property.
+   * No proper subset of CK has the uniqueness property
+   * i.e., a Candidate Key is a minimal Super Key.
+   * One Candidate Key is chosen as the Primary Key. The remaining Candidate Keys are called Alternate Keys. 
+ 
+ A SURROGATE_KEY is an artificially generated, unique identifier for a database record. It is used when the Natural PRIMARY_KEY is too large or cumbersome to handle.
+
+SELECTION OF A PRIMARY KEY
+ - A primary key must be chosen considering the data that may be added to the table in the future.
+ - PK should be free of 'extra' semantic meaning and security compliant, preferably a single attribute, preferably numeric.
+
+WHY NULL
+  - NULL -> is a representation of the fact that there is NO VALUE.
+  - VALUE NOT APPLICABLE -> An attribute doesn't apply in a particular tuple(s).
+  - VALUE UNKNOWN -> A certain Tuple has an unknown value for a certain Attribute.
+  - VALUE DOES NOT EXIST -> A certain Tuple has no value for a certain Attribute.
+  - VALUE UNDEFINED ->  A certain Tuple has an undefined value for a certain Attribute.
+
+FOREGN KEY
+ - An attribute/s in a relation that exists in the same, or another relation as a PRIMARY_KEY.
+ - A FOREIGN_KEY value must either match the full PRIMARY_KEY in a relation or be NULL.
+
+In the unitcode, enrolmark, studid, enrolyear example.
+The Super Keys, Candidate Keys and Primary Key are:
+
+Super Keys -> {unitcode, enrolmark, studid, enrolyear} [The set of all attributes in a relation is a natural Super Key]
+           -> {unitcode, studid, enrolyear} [As a Student can take the same unit in different years. Here, we are assuming that the student cannot take the same unit more than once a year.] -> Tuple values are shown here -> (FIT2094, 205, 2015), (FIT2094, 205, 2016), (FIT9132, 103, 2025), (FIT9132, 103, 2026) 
+
+Candidate Key -> {unitcode, studid, enrolyear} [As the CK must be a Minimal Super Key]
+Primary Key -> {unitcode, studid, enrolyear} [A CK can be a PK. If we had multiple CKs, then one CK would be made a PK and the remaining CKs would be AKs (Alternate Keys)]
+
+Given the following Business Rules:
+  * A physician can only treat one particular patient on a particular date and time.
+  * A patient can only be treated by a Physician on a particular date and time.
+  * A patient may receive multiple treatments from the same physician on a particular date and time.
+PATIENT_TREATMENT (patient_id, physician_id, treatment_code, pt_date, pt_time, pt_result)
+
+(patient_id, physician_id, treatment_code, pt_date, pt_time, pt_result)
+(1000, 2000, TRT200, 07072026, 08:22, SUCCESS)
+(1000, 2000, TRT205, 07072026, 09:15, SUCCESS)
+(1100, 2600, TRT200, 08072025, 03:10, SUCCESS)
+(1200, 2700, TRT206, 09072025, 04:32, FAILURE)
+(1200, 2700, TRT202, 09072025, 04:32, SUCCESS)
+
+It is not possible to have a Super Key without pt_date AND pt_time since the same patient may get the same treatment at the same time with the same result on different weeks. The patient may also get the same treatment more than once on the same date. Thus, any Super Key must include the pt_date AND pt_time attributes.
+
+Here's how to think about dates: Think about daily increments, then think about weekly increments, then think about monthly increments.
+
+Assumptions: More than one treatment can be administered at the same time
+Super Key -> {patient_id, physician_id, treatment_code, pt_date, pt_time, pt_result} [The set of all tuples is a natural Super Key.]
+          -> {patient_id, physician_id, treatment_code, pt_date, pt_time} [Since each set of these tuple values will be unique, i.e., a Super Key]
+          -> {physician_id, treatment_code, pt_date, pt_time} [MINIMAL SUPER KEY]
+          -> {patient_id, treatment_code, pt_date, pt_time} [MINIMAL SUPER KEY]
+
+Candidate Key -> {physician_id, treatment_code, pt_date, pt_time} [Since each set of these tuple values will be unique, i.e., a minimal Super Key]
+              -> {patient_id, treatment_code, pt_date, pt_time} [Since each set of these tuple values will be unique, i.e., a minimal Super Key]
+[Since every minimal Super Key is a Candidate key]
+
+Primary Key   -> {patient_id, physician_id, treatment_code, pt_date} 
+
+A well-designed Relational Database has "Minimal Redundant Data".
+
+A Relational Database is a collection of normalised relations.
+
+Runners may form a team, the runner who registers the team is 
+recorded as the team leader. Each team can have up to 5 members 
+(runners). Identify the FK(s):
+TEAM(team_id, team_name, team_leader)
+RUNNER(runner_id, runner_name, team_id)
+
+The first FOREIGN KEY is runner_id. One TEAM may have up to 5 RUNNERS. So it is a 1:N, i.e., 1:1 to 5  relationship. So, the PRIMARY KEY of the One Side (TEAM) is placed as the FOREIGN KEY of the Many Side (RUNNER). 
+The second FOREIGN KEY is team_leader. This is because team_leader is the runner_id of the RUNNER that is the Team Leader of the TEAM. 
+
+DATA INTEGRITY - IMPLEMENTATION
+ENTITY INTEGRITY -> PK Value must not be NULL AND No duplicate tuple property then ensures that each primary key must be unique
+REFERENTIAL INTEGRITY -> The values of FK must either match a value of a full PK in the related relation or be NULL.
+COLUMN INTEGRITY -> All values in a given column must come from the same domain (the same data type and range).
+
+RELATIONAL ALGEBRA
+The basic operations of Relational Algebra are:
+  * selection 
+  * projection
+  * cartesian product 
+  * join
+  * union 
+  * intersection 
+  * difference 
+  * division
+
+JOIN
+Join operator used to combine data from two or more relations, based on a common attribute or attributes.
+Different Types: 
+  * Theta Join 
+  * Equi Join
+  * Natural Join
+  * Outer Join 
+
+The following set of relations:
+HOSPITAL (hosp_id, hosp_name, hosp_phone)
+DOCTOR (hosp_id, dr_id, dr_name, dr_mobile)
+PATIENT (pat_id, pat_name, pat_dob, dr_id)
+
+MY ASSUMPTIONS:
+  * A HOSTPITAL has many DOCTORS (1 - N).
+  * A HOSPITAL  has many PATIENTS (1 - N).
+  * A DOCTOR has MANY PATIENTS (1 - N).
+
+So PATIENT should have dr_id. Thus REFERENTIAL INTEGRITY between PATIENT and DOCTOR is violated.
+PATIENT has no PK (since pat_id isn't UNDERLINED), so ENTITY INTEGRITY is violated.
+
+In SLIDE 26, we are doing a PROJECT operation on the PROJECT_MANAGER attribute. The OUTPUT of this Operation will be 1 ATTRIBUTE and 4 TUPLES due to no redundancy allowed in the OUTPUT. This is because the OUTPUT of an Operation on a RELATION is another RELATION and RELATIONS can't have REDUNDANT TUPLES or ATTRIBUTES.
+
+The Answer to the Question in SLIDE 31 is:
+(1)  SELECT member_name, member_dob FROM MEMBER WHERE member_belt = "Black";
+PI (member_name, member_dob)( SIGMA (member_belt = "Black"))
+
+NATURAL JOIN
+In a NATURAL JOIN, the following happen:
+  * A Cartesian Product is taken.
+  * The rows where the IDs do not match are deleted.
+  * Projection deletes duplicate columns and rows.
+===================WEEK 03===================

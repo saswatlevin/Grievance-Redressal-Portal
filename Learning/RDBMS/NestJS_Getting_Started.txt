@@ -1,0 +1,24 @@
+====LANGUAGE====
+NextJS is compatible with JS and TS. If JS is to be used, then Babel is needed as a compiler.
+TS is the preferred language.
+====LANGUAGE====
+
+====SETUP=======
+NextJS needs to be installed with the following command: "npm i -g @nestjs/cli"
+The initial project will have the following files when we set it up using the following command: "nest new --strict project-name"
+. If we want to enable the TS' STRICT mode, then we need to run "nest new --strict project-name".
+
+The project setup will create the following files:
+  * app.controller.spec.ts -> The Unit Tests for the Controller.
+  * app.controller.ts      -> A basic controller with a single route.
+  * app.module.ts          -> The root module of the application.
+  * app.service.ts         -> A basic service with a single method.
+  * main.ts                -> The entry file of the application which uses the core function NestFactory to create a Nest application instance.   
+====SETUP=======
+
+====PLATFORM====
+NestJS is platform-agnostic. It can work with any NodeJS platform once an adaptor is created.
+It offers out-of-the-box support for Express and Fastify. Express is enabled by default.
+====PLATFORM====
+
+The create() method returns an application object, which fulfills the INestApplication interface. 

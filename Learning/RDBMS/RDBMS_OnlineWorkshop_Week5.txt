@@ -1,0 +1,91 @@
+Characteristics of a Relational Model
+  ▪ Each relation must have a unique name
+  ▪ Each attribute of a relation must have a distinct name within the relation
+  ▪ An attribute cannot be multivalued (consist of repeating values)
+  ▪ All values of an attribute need to be from the same domain
+  ▪ The order of attributes and tuples in a relation is immaterial
+  ▪ Each relation must have a primary key
+  ▪ Logical (not physical) connections are made between relations by virtue of primary/foreign keys
+
+Answer to Q1 of WEEK5 Q&A Workshop
+  * The Answer is E: More than answer is correct. This is because in case of a Composite attribute, we need to break that attribute to single-valued attributes to ensure Atomicity. In case of a multi-valued attribute, we need to create a new entity in order to accommodate it.
+
+The following steps must be taken when transforming an ER Diagram to a Conceptual Model:
+  – Map strong (regular) entities
+  – Map weak entities
+  – Map binary relationships
+  – Map associative entities
+  – Map unary relationships 
+  – Map ternary relationship  
+
+COMPOSITE ATTRIBUTES: When the regular entity type contains a composite  attribute, only the simple attributes of the composite attribute are included in the new relation.
+
+MAPPING REGULAR ENTITIES
+MULTI-VALUED ATTRIBUTE: 
+  – When the regular entity type contains a multivalued attribute, two new relations are created. 
+  – The first relation contains all the attributes of the entity type except the multivalued attribute itself. 
+  
+  – The second relation contains two attributes that form the PK. One of the attributes is the PK from the first relation, which becomes the FK in the second relation and the other is the multivalued attribute. 
+  – There can also be non key attributes in the second relation depending upon the data requirements.
+
+MAPPING A WEAK ENTITY
+  *  For each weak entity type, create a new relation and include all of the simple attributes as attributes of this relation. The PK of the identifying relation is also included as the FK in this new relation.
+
+MAPPING A 1:M BINARY RELATIONSHIP
+  * For each 1:M binary relationship, first create a relation for each of the two entity types participating in the relationship. Then include the PK 
+attribute (or attributes) of the entity on the one-side of the relationship as the FK on the many-side of the relationship.
+
+Mapping a Binary (1:1) Relationship:
+  Create two relations, one for each of the participating entity types. 
+  – The primary key (PK) on the mandatory side of the relationship becomes the foreign key (FK) on the optional side of the relationship. 
+  – Where both are optional place the FK on the side which causes the fewest nulls
+  – Special case: 1:1 total relationship (mandatory participation from both sides)
+    • Should consolidating the two entity types into one relation
+
+Answer to Q2 of WEEK5 Q&A Workshop
+  * The answer is B: ORDER. This is because CUSTOMER - ORDER are in a 1:N relationship and in that type of relationship, the PK of the One side becomes the FK of the N side.
+
+Mapping an M:N Relationship:
+  – First create a relation for each of the two entity types participating in the relationship. 
+  – Then create a new relation and include as foreign key attributes, the PK attribute (or attributes) for each of the two participating entity types. These 
+attributes become the PK of the new relation. 
+  – If there are any non-key attributes associated with the M:N relationship, they are also included in the new relation
+
+Answer to Q3 of WEEK5 Q&A Workshop
+  * The Answer is C: The combination of primary keys of ORDER and PRODUCT.
+
+Answer to Q4 of WEEK5 Q&A Workshop
+  * The answer is B: CARE_CENTER. NURSE - CARE_CENTER is in a 1:1 relationship. This is because every CARE_CENTER will have a NURSE in charge of it. So, placing nurse_id in it will result in no NULLS. If we placed care_center_id in the NURSE Entity, then there will be a lot of NULLS in it since every NURSE may not be part of a CARE_CENTER.
+
+A CARE_CENTER must have a NURSE in charge of it, so its participation is mandatory. A NURSE may not be part of a CARE_CENTER, so its participation is optional,.
+
+Unary 1:M Relationship – A relation is created for the entity type. Add a FK within the same relation that references the PK of the relation. A recursive foreign key is a FK in a relation that references the PK values of the same relation.
+
+Unary M:N Relationship – Two relations are created, one for the entity type in the relationship and the other as the associative relation to represent the M:N relationship itself. The PK of the associative relation consists of two attributes (with different names) taking their values from the PK of the other relation.
+
+
+=========================================MONASH SOFTWARE CASE STUDY=========================================
+When mapping the EMPLOYEE entity from the Conceptual Model to the Logical Model, we decompose the Composite Attribute emp_name to [emp_fname, emp_lname]. In the Logical Model, asterisks beside attributes in the Entities, represent NOT NULL
+
+Given that "emp_skill" was a multi-valued attribute, therefore it needs to be spun out into a new Entity called SKILL. This SKILL will have emp_id and emp_skill as the PK. emp_id will also be the FK. EMPLOYEE - SKILL will have a 1:N relationship, thus emp_id will be the FK of SKILL. The data in SKILL will be as follows: EMP_ID EMP_SKILL
+               1      JAVA
+               1      SQL
+               2      JAVA
+               3      SQL
+This presents an UPDATE Anomaly. Here, when we need to update a skill, we need to update multiple rows.
+The solution to this is to move the skill out into a further relation and introduce a surrogate key. The SOLUTION: EMPLOYEE - SKILL (M:N) -> SKILL (skill_code, skill_name) in the Conceptual Model.
+
+An Associative Entity EMP_SKILL (emp_no, skill_code) is introduced. This Entity has N:1 relationships with SKILL and EMPLOYEE respectively. 
+
+EXAMPLE:
+The EMPLOYEE - EMP_DEPENDENT relation is (1:N) and EMP_DEPENDENT is a Weak Entity. As it a Weak Entity, EMP_DEPENDENT has a composite PK that contains the PK of EMPLOYEE (emp_id) and its own PK (edep_id). Since it is on the N side of a 1:N relationship, thus the PK of EMPLOYEE is the FK of EMP_DEPENDENT. 
+
+What applies to the EMPLOYEE - EMP_DEPENDENT relation also applies to the EMPLOYEE - FAMILY_MEMBER relation in the MONASH SOFTWARE CASE STUDY.
+
+When Mapping the TEAM - EMPLOYEE relationship (0 or 1 : N) is mapped from the Conceptual to the Logical Model, then we put the PK of TEAM (team_no) in EMPLOYEE as an FK. 
+NOTE: The team_no in EMPLOYEE is allowed to be NULL since an EMPLOYEE can sometimes not belong to any TEAM.
+
+When mapping the EMPLOYEE - leads - TEAM relationship (0:1 - 0:1), then emp_no is placed in TEAM as this will minimize the number of NULLS.
+
+In the EMPLOYEE - mentors EMPLOYEE (1:M) relationship, we place the emp_no (PK) of EMPLOYEE as an FK in EMPLOYEE. Since we can't have emp_no twice in EMPLOYEE, so we rename it to mentor_no.
+=========================================MONASH SOFTWARE CASE STUDY=========================================

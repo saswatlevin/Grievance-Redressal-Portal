@@ -1,0 +1,74 @@
+===================WEEK 04===================
+DATA Normalisation:
+  * Relations should be normalised in order to avoid anomalies which may occur when inserting, updating and deleting data.
+  * Normalisation is a systematic series of steps for progressively refining the data model.
+  * Used  as a way of validating structures produced via "top down design" (ER model converted to a logical model - see next week).
+
+The NEED for NORMALISATION:
+  * It prevents ENTRY ERRORS.
+  * For tables with REDUNDANT DATA, it prevents Insert, Update and Delete ANOMALIES.
+  
+  * Insert Anomaly: The inability to add new data because required attributes are missing. For example, you cannot add a new student-advisor pair to a table if the student hasn't registered for classes yet. REPHRASE: When adding data to a relation, you are required to add other related data.
+  
+  * Update Anomaly: Modifying a single piece of data requires updating multiple rows. If an employee’s address changes, you have to update it across every record associated with them, risking data inconsistency if one is missed. REPHRASE: Changing a value for a tuple requires multiple values to be changed.
+  
+  * Delete Anomaly: Deleting a specific record unintentionally erases unrelated, essential data. For example, deleting the only student enrolled in a specific course removes the record of the course itself from the database. REPHRASE: When a tuple in a relation is deleted, all tuple data is removed.
+
+NORMALISATION PROCESS GOALS:
+  After the Normalisation process is completed, each relation should have the following properties:
+  * Entity Integrity
+  * Referential Integrity
+  * No M:N Relationship
+  * Each cell contains a single value (Is Atomic)
+
+This practically translates to:
+  * Each table represents a single subject.
+  * No data item will be unnecessarily stored in more than one table.
+  * The relationship between tables can be established (pair of PK and FK is identified).
+  * Each table is void of insert, update and delete anomalies.
+
+REPRESENTING A FORM AS A RELATION
+  * Arrive at a name for the form which indicates the subject that it represents.
+  * Determine if any attribute is multivalued (repeating) for a given entity instance of the forms subject.
+  * if an attribute (or set of attributes) appears multiple times then the group of related attributes need to be shown enclosed in brackets to indicate there are multiple sets of these values for each instance.
+
+FUNCTIONAL DEPENDENCY REVISITED
+  * An attribute B is FUNCTIONALLY DEPENDENT on another attribute A, if a value of A determines a single value of B at any one time. A -> B.
+  * For a Composite Primary Key, it is possible to have FULL or PARTIAL dependency.
+  * FULL DEPENDENCY occurs when an attribute is dependent on all attributes of the Composite PRIMARY KEY.
+  * A PARTIAL DEPENDENCY occurs when an attribute is dependent only on some of the attributes of the Composite PRIMARY KEY.
+  * TRANSITIVE DEPENDENCY: X  -> Y, Y -> Z and thus X -> Z.
+   
+
+TOTAL DEPENDENCY
+  * Attribute A determines B AND attribute B determines A.
+
+Dependencies are depicted with the help of a Dependency Diagram.
+
+Normalisation converts a relation into relations of progressively smaller number of attributes  and tuples until an optimum level of decomposition 
+is reached.
+
+
+Move from UNF to 1NF by:
+1. Identify a unique identifier for the repeating group.
+2. Remove any repeating group along with the PK of the main relation.
+3. The PK of the new relation resulting from the removal of repeating group will normally be composite and made up of the PK of the main relation and the unique identifier chosen in STEP 1 above, but this must be checked.
+
+Move from 1NF to 2NF by:
+  – all non key attributes are functionally dependent on the primary key (simple definition) used by the textbook in examples.
+  – all non key attributes are functionally dependent on any candidate key (general definition).
+
+Move from 2NF to 3NF by:
+  • Remove the attributes with transitive dependency into a new relation.
+  • The determinant will be an attribute in both the original and new relations (it will become the PK and FK relationship).
+  • Assign the determinant to be the PK of the new relation.
+
+NORMAL FORMS:
+A relation is in 1NF if every row has a unique, non-null primary key, each cell holds a single value, and all attributes depend on the primary key.
+A relation is in 2NF if all non key attributes are functionally dependent on the primary key. 
+A relation is in 3NF if all transitive dependencies have been removed.
+  * We need to check for non key attribute dependent on another non key attribute.
+  * We need to remove all transitive dependencies.
+
+
+===================WEEK 04===================

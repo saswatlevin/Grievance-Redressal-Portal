@@ -1,0 +1,34 @@
+DRONE(drone_id, drone_type_code, drone_purchase_date, drone_type_model, done_carrying_capacity, drone_hire_rate, drone_total_flight_hours)
+TRAINING_COURSE (training_code, training_description, training_duration)
+CUSTOMER (customer_id, customer_name, customer_contact_number)
+//CUST_TRAIN (training_code, cust_train_completion_date, cust_train_expiry_date)
+DRONE_RENTAL(drone_rental_number, drone_rental_issue_date, drone_rental_bond, training_code, drone_retal_return_date)
+
+TRAINING_COURSE - DRONE (1:N)
+CUSTOMER - TRAINING_COURSE (M:N)
+CUSTOMER - DRONE_RENTAL (M:N)
+TRAINING_COURSE - DRONE_RENTAL (1:N)
+
+DRONE NORMALISATION FORM
+UNF: There are 3 repeating groups: (dt_code, dt_model, dt_manuf);;; (train_date,trainer_id, trainer_rego, trainer_fname, trainer_lname, trainer_category) AND (cust_id, cust_fname,cust_lname, ct_exam_date, ct_date_expire) with the 3rd repeating group nested inside the second.
+
+1NF:
+
+TRAINING(train_code, train_desc, train_active_mnths)
+
+DRONETYPE (dt_code, dt_model, dt_manuf, train_code)
+NOTE: 
+
+TRAINING_COURSE (train_code, train_date, trainer_id, trainer_rego, trainer_fname,trainer_lname, trainer_category)
+CK train_date, trainer_id (and train_date, trainer_rego assuming trainer_rego is unique)
+
+CUST_TRAINING (train_code, train_date, cust_id, cust_fname, cust_lname, ct_exam_date,ct_date_expire)
+
+Partial Dependencies:
+cust_id -> cust_fname, cust_lname
+
+trainer_id -> trainer_rego, trainer_fname, trainer_lname, trainer_category
+(selected to use trainer_id from the CK's, using trainer_rego is an alternative and would produce:
+
+trainer_rego -> trainer_id, trainer_fname, trainer_lname, trainer_category
+However given our characteristics for a PK, trainer_id is a better choice)

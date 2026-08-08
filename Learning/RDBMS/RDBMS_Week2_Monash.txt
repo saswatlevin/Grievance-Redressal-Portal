@@ -1,0 +1,95 @@
+===================WEEK 02===================
+The Database lifecycle consists of the following phases: Requirements Definition, Conceptual Design, Logical Design and Physical Design
+In the Requirements Definition phase, we get a statement of specifications which describes the user views' particular requirements and constraints.
+
+The conceptual design is represented as an ERD - Entity Relationship Diagram.
+NOTE: When we make a Conceptual Design using these rules, we DO NOT decide the type of database (RDB or Otherwise) to be used.
+NOTE: The Carlos M. Coronel Textbook makes a very poor distinction between Conceptual Model and Logical Model.
+
+An ENTITY will have attributes (things we wish to record), one or more of which will identify an entity instance (called the KEY).
+NOTE: At the Conceptual Model stage, there is no Primary Key or Foreign Key, just a Key.
+
+After constructing the Conceptual Model, we need to construct the Logical Model which targets a type of Database. 
+In our case, this is a Relational Database, and hence, will be a Relational Model.
+
+NOTE: We will be using the Crow's Foot Notation (CFN) here.
+The CFN speaks of Connectivity and Cardinality. 
+Connectivity refers to the way in which 2 given Entities connect with each other.
+Eg - Entity A Supports 1 of Entity B and Entity B supports 1 of Entity A. (1 to 1)
+Eg - Entity A Supports N of Entity B and Entity B supports 1 of Entity A. (1 to N)
+Eg - Entity A Supports N of Entity B and Entity B supports M of Entity A. (M to N)
+
+Eg - A(1,1) - B(0, N) -> Here the min. Cardinality of A is 1 and the max. Cardinality of A is also 1. Here the min. Cardinality of B is 0 and the max. Cardinality of B is N.
+
+There are 3 Degrees of relationships: Unary, Binary and Ternary.  
+A Unary Relationship is an Entity having a relationship with itself.
+A Binary Relationship is a relationship between 2 Entities.
+A Ternary Relationship is a Relationship between 3 or more Entities.
+
+NOTE: We will NOT BE USING Strong and Weak Relationships.
+
+A Weak Entity is an Entity that has a key that requires the existence of one or more other entities, i.e., its key will have a key from the Strong Entity.
+Eg - FAMILY Entity. The Family Entity cannot exist without the Employee Entity. 
+
+Eg - Family member 1 of Employee 1. 
+Eg - Family member 2 of Employee 1. 
+Eg - Family member 1 of Employee 2. 
+Eg - Family member 2 of Employee 2.
+
+A Strong Entity is an Entity that has a key that can be defined without reference to other entities.
+Eg - EMPLOYEE Entity.
+Weak and Strong Entities are decided using Business Rules.
+
+Identifying vs. Non-Identifying relationship.
+
+Identifying -> In an Identifying relationship, Identifier of A is part of Identifier of B, i.e., the key of the child is part of the key of the parent. It is shown by a solid line. Eg -> ENROLMENT - STUDENT. The student_id is included in ENROLMENT's Key.
+
+Non-Identifying Relationship -> In a Non-Identifying relationship, Identifier of A is NOT part of Identifier of B. It is shown by a dotted line. Eg -> DEPARTMENT - EMPLOYEE. The dept_no is not part of the EMPLOYEE's identifier.
+
+Types of Attributes:
+Single -> Can't be subdivided.
+Composite -> Can be divided into additional attributes.
+Single-Valued -> Can only have a Single value.
+
+
+Multi-Valued -> Can have many values.
+Derived -> Can be derived from an algorithm.
+
+MONASH SOFTWARE CASE STUDY
+  * EMPLOYEE (emp_id, emp_full_name, emp_address, emp_dob, emp_tfn, team_leader)
+  * TEAM     (team_id, team_name, member_id)
+  * FAMILY   (family_id, family_member_num)
+  * TRAINING (train_code, train_name, train_completion_date)  
+
+NOTE: Team Leader isn't an Entity since it is just an EMPLOYEE acting in a certain role. 
+NOTE: A Mentor isn't an Entity since it is just an EMPLOYEE acting in a certain role.
+  
+MY SOLUTION:
+* An EMPLOYEE can belong to 0 or 1 TEAM. A TEAM can have N EMPLOYEE. EMPLOYEE - TEAM (N - 1).
+* An EMPLOYEE can have 1 or more SKILLS. Each SKILL belongs to 1 EMPLOYEE. [SKILLS is a Relation since it is a multi-valued attribute]
+
+* An EMPLOYEE can LeAd a TEAM (This is how we represent the second relationship between EMPLOYEE and TEAM). 
+* An EMPLOYEE can have 0 or 1 MENTOR. Every MENTOR can have 1 or N EMPLOYEE. EMPLOYEE - MENTOR (1 to 0 or 1).
+
+* An EMPLOYEE can complete 0 or more TRAINING Programs. A TRAINING Program can be completed by 1 or more EMPLOYEE. EMPLOYEE - TRAIN (1 or N - 0 or N).
+* An EMPLOYEE can 0 or more FAMILY members that have benefits. Each of these FAMILY members can belong to one EMPLOYEE. EMPLOYEE - FAMILY (1 - 0 or N).
+
+Lindsay Smith's Solution:
+* The Entity Name should always be a Singular, never a Plural.
+* Established the TEAM, TRAINING, EMPLOYEE and FAMILY_MEMBER entities.
+
+* Should establish the relations between them.
+* Team Leader isn't an Entity since it is just an EMPLOYEE acting in a certain role.
+
+* A Mentor isn't an Entity since it is just an EMPLOYEE acting in a certain role.
+* Address is a composite attribute.
+
+* A multi-valued attribute is dealt with by moving it out into a new Entity. This new Entity will be a Weak Entity and its Key will depend on (have an attribute from) the Parent's Key.
+
+* The EMPLOYEE - TRAINING relationship is (0, N) - (0, M) since EMPLOYEE DO NOT have to mandatorily take up TRAINING. It is also because a particular TRAINING can be taken up by M EMPLOYEE.
+  NOTE: Here we assume that a TRAINING can exist even if it has 0 EMPLOYEE in it.  
+
+* Now, we need to look at the TRAINING_CERTIFICATE Entity. A TRAINING_CERTIFICATE cannot be stored in an EMPLOYEE Entity since a given EMPLOYEE may complete N TRAININGS and this would result in TRAINING_CERTIFICATE being a multi-valued attribute. A TRAINING_CERTIFICATE cannot be stored in a TRAINING either since a given TRAINING may be completed by N EMPLOYEE. A given EMPLOYEE may also complete a given TRAINING more than once. Thus we need to create a new Entity called TRAINING_CERTIFICATE which will have the emp_no and train_code keys. This type of entity is called an Associative Entity.
+
+* The Associative Entity will have N:1 (N being on the Associative Entity's side) relationship with both its parent Entities.
+===================WEEK 02===================
