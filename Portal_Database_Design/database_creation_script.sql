@@ -151,12 +151,31 @@ ON DELETE RESTRICT;
 --ALTER TABLE users
 --ADD COLUMN user_status user_status_enum NOT NULL;
 
+--ALTER TABLE users
+--ALTER COLUMN user_status SET DEFAULT 'active';
+
 ALTER TABLE users
 ADD CONSTRAINT fk_user_outlet
 FOREIGN KEY(outlet_id) REFERENCES outlets(outlet_id)
 ON DELETE SET NULL;
 
--- user_id, user_date_created_at, user_first_name, user_last_name, user_password, user_email, user_dob, user_role, user_address_room_no, user_address_building, user_address_street, user_address_city, user_address_admin_division, user_address_country, user_address_post_code, user_mobile_no, user_is_moderator
+
+-- Trigger to coduct actions during soft delete of comments.
+CREATE OR REPLACE FUNCTION replace_deleted_comment_content()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.comment_is_deleted = true THEN
+        NEW.comment_content := 'This comment has been deleted';
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_replace_deleted_comment_content
+BEFORE UPDATE ON comments
+FOR EACH ROW
+EXECUTE FUNCTION replace_deleted_comment_content();
+
 
 INSERT INTO  users (user_date_created_at, user_first_name, user_last_name, user_password, user_email, user_dob, user_role, user_address_room_no, user_address_building, user_address_street, user_address_city, user_address_admin_division, user_address_country, user_address_post_code, outlet_id, user_mobile_no, user_is_moderator, user_status) VALUES (NOW(), 'ABCFname', 'ABCLname', 'abc@123pwd00', 'abc@server.com', '1998-04-06', 'restaurant_employee', '1204', 'Marina Heights', 'Dubai Marina', 'Dubai', 'Dubai', 'United Arab Emirates', '000000', NULL, '971501234567', false, 'active');
 
@@ -164,7 +183,7 @@ INSERT INTO  users (user_date_created_at, user_first_name, user_last_name, user_
 
 INSERT INTO  users (user_date_created_at, user_first_name, user_last_name, user_password, user_email, user_dob, user_role, user_address_room_no, user_address_building, user_address_street, user_address_city, user_address_admin_division, user_address_country, user_address_post_code, outlet_id, user_mobile_no, user_is_moderator, user_status) VALUES (NOW(), 'GHIFname', 'GHILname', 'ghi@267pwd00', 'ghi@server.com', '1998-05-06', 'company_employee', '704', 'Al Qasimia Tower', 'Al Qasimia', 'Sharjah', 'Sharjah', 'United Arab Emirates', '000000', NULL, '971543456789', true, 'active');
 
-INSERT INTO  users (user_date_created_at, user_first_name, user_last_name, user_password, user_email, user_dob, user_role, user_address_room_no, user_address_building, user_address_street, user_address_city, user_address_admin_division, user_address_country, user_address_post_code, outlet_id, user_mobile_no, user_is_moderator, user_status) VALUES (NOW(), 'GHIFname', 'GHILname', 'ghi@267pwd00', 'ghi@server.com', '1996-05-06', 'company_manager', '704', 'Al Qasimia Tower', 'Al Qasimia', 'Sharjah', 'Sharjah', 'United Arab Emirates', '000000', NULL, '971543456789', true, 'active');
+INSERT INTO  users (user_date_created_at, user_first_name, user_last_name, user_password, user_email, user_dob, user_role, user_address_room_no, user_address_building, user_address_street, user_address_city, user_address_admin_division, user_address_country, user_address_post_code, outlet_id, user_mobile_no, user_is_moderator, user_status) VALUES (NOW(), 'GHSFname', 'GHSLname', 'ghs@107pwd00', 'ghs@server.com', '1996-05-06', 'company_manager', '714', 'Al Qasimia Tower', 'Al Qasimia', 'Sharjah', 'Sharjah', 'United Arab Emirates', '000000', NULL, '971542345678', true, 'active');
 
 INSERT INTO  users (user_date_created_at, user_first_name, user_last_name, user_password, user_email, user_dob, user_role, user_address_room_no, user_address_building, user_address_street, user_address_city, user_address_admin_division, user_address_country, user_address_post_code, outlet_id, user_mobile_no, user_is_moderator, user_status) VALUES (NOW(), 'JKLFname', 'JKLLname', 'jkl@193pwdn1', 'jkl@server.com', '1994-05-06', 'restaurant_employee', '305', 'Al Nuaimiya Tower', 'Al Nuaimiya', 'Ajman', 'Ajman', 'United Arab Emirates', '000000', NULL, '971554567890', false, 'active');
 
@@ -192,7 +211,7 @@ INSERT INTO  users (user_date_created_at, user_first_name, user_last_name, user_
 
 INSERT INTO  users (user_date_created_at, user_first_name, user_last_name, user_password, user_email, user_dob, user_role, user_address_room_no, user_address_building, user_address_street, user_address_city, user_address_admin_division, user_address_country, user_address_post_code, outlet_id, user_mobile_no, user_is_moderator, user_status) VALUES (NOW(), 'TSRFname', 'TSRLname', 'tsr@108pwd01', 'tsr@server.com', '1992-04-10', 'restaurant_manager', '', '3258', 'Dhahran Street', 'Al Khobar', 'Eastern Province', 'Saudi Arabia', '34446', 7, '966554456790', false, 'active');
 
-INSERT INTO  users (user_date_created_at, user_first_name, user_last_name, user_password, user_email, user_dob, user_role, user_address_room_no, user_address_building, user_address_street, user_address_city, user_address_admin_division, user_address_country, user_address_post_code, outlet_id, user_mobile_no, user_is_moderator) VALUES (NOW(), 'PSRFname', 'PSRLname', 'psr@108pwd01', 'psr@server.com', 1991-03-08, 'restaurant_employee', '', '3258', 'Dhahran Street', 'Al Khobar', 'Eastern Province', 'Saudi Arabia', '34446', 7, '966554123456', false);
+INSERT INTO  users (user_date_created_at, user_first_name, user_last_name, user_password, user_email, user_dob, user_role, user_address_room_no, user_address_building, user_address_street, user_address_city, user_address_admin_division, user_address_country, user_address_post_code, outlet_id, user_mobile_no, user_is_moderator) VALUES (NOW(), 'PSRFname', 'PSRLname', 'psr@108pwd01', 'psr@server.com', '1991-03-08', 'restaurant_employee', '', '3258', 'Dhahran Street', 'Al Khobar', 'Eastern Province', 'Saudi Arabia', '34446', 7, '966554123456', false);
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 INSERT INTO chains (chain_date_created_at, chain_name, chain_headquarters_address_room_no, chain_headquarters_address_building, chain_headquarters_address_street, chain_headquarters_address_city, chain_headquarters_address_admin_division, chain_headquarters_address_country, chain_headquarters_address_post_code) VALUES (NOW(), 'Tim Hortons', '', 'Apparel Group Building', 'Jebel Ali Free Zone South', 'Dubai', 'Dubai', 'United Arab Emirates', '000000');
 
@@ -213,22 +232,54 @@ INSERT INTO outlets (outlet_date_created_at, outlet_name, outlet_address_room_no
 
 INSERT INTO outlets (outlet_date_created_at, outlet_name, outlet_address_room_no, outlet_address_building, outlet_address_street, outlet_address_city, outlet_address_admin_division, outlet_address_country, outlet_address_post_code, chain_id) VALUES (NOW(), 'Graph Cafe #2', '', '', 'Alnuman Ibn Harithah Street', 'Al-Khobar', 'Eastern Province', 'Saudi Arabia', '34714', 2);
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-INSERT INTO posts (post_date_created_at, post_content, user_id, post_status) VALUES (NOW(), 'ABC Post One', '', 'open');
-INSERT INTO posts (post_date_created_at, post_content, user_id, post_status) VALUES (NOW(), 'ABC Post Two', '', 'open');
-INSERT INTO posts (post_date_created_at, post_content, user_id, post_status) VALUES (NOW(), 'ABC Post Three', '', 'open');
-INSERT INTO posts (post_date_created_at, post_content, user_id, post_status) VALUES (NOW(), 'STU Post One', '', 'open');
-INSERT INTO posts (post_date_created_at, post_content, user_id, post_status) VALUES (NOW(), 'STU Post Two', '', 'open');
-INSERT INTO posts (post_date_created_at, post_content, user_id, post_status) VALUES (NOW(), 'JULF Post One', '', 'open');
-INSERT INTO posts (post_date_created_at, post_content, user_id) VALUES (NOW(), 'JULF Post Two', '');
+INSERT INTO posts (post_date_created_at, post_content, user_id, post_status) VALUES (NOW(), 'ABC Post One', 17, 'open');
+INSERT INTO posts (post_date_created_at, post_content, user_id, post_status) VALUES (NOW(), 'ABC Post Two', 17, 'open');
+INSERT INTO posts (post_date_created_at, post_content, user_id, post_status) VALUES (NOW(), 'ABC Post Three', 17, 'open');
+INSERT INTO posts (post_date_created_at, post_content, user_id, post_status) VALUES (NOW(), 'STU Post One', 23, 'open');
+INSERT INTO posts (post_date_created_at, post_content, user_id, post_status) VALUES (NOW(), 'STU Post Two', 23, 'open');
+INSERT INTO posts (post_date_created_at, post_content, user_id) VALUES (NOW(), 'JULF Post One', 25);
+INSERT INTO posts (post_date_created_at, post_content, user_id) VALUES (NOW(), 'JULF Post Two', 25);
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-INSERT INTO comments (comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, reply_id) VALUES (NOW(), 'STU Post One Comment One', false, '', '', '');
-INSERT INTO comments (comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, reply_id) VALUES (NOW(), 'STU Post One Comment Two', false, '', '', '');
-INSERT INTO comments (comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, reply_id) VALUES (NOW(), 'STU Post One Comment Two Reply One', false, '', '', '');
-INSERT INTO comments (comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, reply_id) VALUES (NOW(), 'STU Post One Comment Two Reply Two', false, '', '', '');
+INSERT INTO comments (comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, reply_id) VALUES (NOW(), 'ABC Post One Comment One', false, 1, 17, NULL);
+INSERT INTO comments (comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, reply_id) VALUES (NOW(), 'ABC Post One Comment One Reply One', false, 1, 17, 3);
+INSERT INTO comments (comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, reply_id) VALUES (NOW(), 'ABC Post One Comment One Reply Two', false, 1, 17, 3);
+INSERT INTO comments (comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, reply_id) VALUES (NOW(), 'ABC Post One Comment Two', false, 1, 17, NULL);
+INSERT INTO comments (comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, reply_id) VALUES (NOW(), 'ABC Post One Comment Two Reply One', false, 1, 17, 6);
+INSERT INTO comments (comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, reply_id) VALUES (NOW(), 'ABC Post One Comment Two Reply Two', false, 1, 17, 6);
+INSERT INTO comments (comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, reply_id) VALUES (NOW(), 'STU Post One Comment One', false, 4, 23, NULL);
+INSERT INTO comments (comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, reply_id) VALUES (NOW(), 'STU Post One Comment Two', false, 4, 23, NULL);
+INSERT INTO comments (comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, reply_id) VALUES (NOW(), 'STU Post One Comment Two Reply One', false, 4, 23, 10);
+INSERT INTO comments (comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, reply_id) VALUES (NOW(), 'STU Post One Comment Two Reply Two', false, 4, 23, 10);
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-INSERT INTO images (image_date_created_at, image_path, image_tag, post_id) VALUES (NOW(), '/images/stu_post_image_1', '', '');
-INSERT INTO images (image_date_created_at, image_path, image_tag, post_id) VALUES (NOW(), '/images/stu_post_image_2', '', '');
+INSERT INTO images (image_date_created_at, image_path, image_tag, post_id) VALUES (NOW(), '/images/stu_post_1_image_1', NULL, 4);
+INSERT INTO images (image_date_created_at, image_path, image_tag, post_id) VALUES (NOW(), '/images/stu_post_1_image_2', NULL, 4);
+INSERT INTO images (image_date_created_at, image_path, image_tag, post_id) VALUES (NOW(), '/images/stu_post_2_image_1', NULL, 5);
+INSERT INTO images (image_date_created_at, image_path, image_tag, post_id) VALUES (NOW(), '/images/stu_post_2_image_2', NULL, 5);
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- Use \d to see all the constraints of a table in postgres.
+-- \d <table_name>
+
+-- Backing up the database
+-- pg_dump -U postgres -d my_database -f backup.sql
+
+-- Restoring the database
+-- psql -U postgres -d my_database -f backup.sql
+
+/**
+Delete a USER that has no OUTLET assigned to it. -> Only that USER is deleted. -> DONE
+Delete an OUTLET which has USER(s) -> The respective outlet_id(s) of the respective USER(s) should become NULL. -> DONE
+Delete a COMMENT without replies -> Only that COMMENT should be deleted. -> DONE
+Delete a COMMENT with replies -> Replies should remain. Their reply_id should become NULL. -> DONE
+Delete a COMMENT that is a reply -> Only that COMMENT should be deleted. -> DONE
+Soft-delete a COMMENT, i.e., set comment_is_deleted to true -> The comment_content should change to "This comment has been deleted".  -> DONE
+
+Delete an IMAGE. -> Only that IMAGE should be deleted. -> DONE
+Delete a POST. All the corresponding COMMENT(s) and IMAGE(s) of that POST should be deleted. -> DONE
+Delete a CHAIN. -> Shouldn't be possible to delete it. -> DONE
+Delete a CHAIN after deleting all OUTLETS. -> DONE
+
+**/
 
 /**
 OUTLETS - USERS (0:1 - 1:N) A given outlet may have 1 or N users. A given user can belong to only 1 outlet or no outlet. When we delete an OUTLET, then the outlet_id in the respective USER should be made NULL.
