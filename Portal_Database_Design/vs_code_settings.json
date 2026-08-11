@@ -1,0 +1,29 @@
+{
+    "telemetry.telemetryLevel": "off",
+    
+    "git.autorefresh": false,
+    "git.autofetch": false,
+    
+    "breadcrumbs.enabled": false,
+    "editor.minimap.enabled": false,
+    "editor.hover.delay": 500,
+
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/**": false,
+        "**/.venv/**": true,
+        "**/venv/**": true,
+        "**/dist/**": true,
+        "**/build/**": true,
+        "**/coverage/**": true
+    },
+
+    "search.exclude": {
+        "**/node_modules": false,
+        "**/dist": true,
+        "**/build": true,
+        "**/coverage": true,
+        "**/.git": true
+    }
+}
