@@ -94,3 +94,37 @@ sudo vi /etc/postgresql/17/main/postgresql.conf
 
 # Check postgres logs
 sudo tail -f /var/log/postgresql/postgresql-17-main.log
+
+# =========INSTALL VISUAL STUDIO CODE========== #
+echo "Updating All Repositories"
+sudo apt update
+
+echo "Installing wget"
+sudo apt install wget
+
+echo "Installing gpg"
+sudo apt install gpg
+
+echo "Getting the Key"
+wget -qO- https://packages.microsoft.com/keys/microsoft.asc \
+  | gpg --dearmor \
+  | sudo tee /usr/share/keyrings/packages.microsoft.gpg > /dev/null
+
+echo "Adding the repository" 
+echo "deb [arch=amd64,arm64,armhf signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" \
+  | sudo tee /etc/apt/sources.list.d/vscode.list
+
+echo "Updating All Repositories"
+sudo apt update
+
+echo "Installing VS Code"
+sudo apt install code
+
+# =========INSTALL GITHUB DESKTOP========== #
+## Direct copy-paste from official instrubtions
+## Github Desktop for Ubuntu
+## Get the @shiftkey package feed
+wget -qO - https://apt.packages.shiftkey.dev/gpg.key | gpg --dearmor | sudo tee /usr/share/keyrings/shiftkey-packages.gpg > /dev/null
+sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/shiftkey-packages.gpg] https://apt.packages.shiftkey.dev/ubuntu/ any main" > /etc/apt/sources.list.d/shiftkey-packages.list'
+## Install Github Desktop for Ubuntu
+sudo apt update && sudo apt install github-desktop
