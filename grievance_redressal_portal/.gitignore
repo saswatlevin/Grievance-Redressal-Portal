@@ -28,6 +28,13 @@ lerna-debug.log*
 .settings/
 *.sublime-workspace
 
+# Unused Directories / Files
+skills-lock.json
+.agents
+.claude
+.windsurf
+
+
 # IDE - VSCode
 .vscode/*
 !.vscode/settings.json
@@ -54,3 +61,7 @@ pids
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+/generated/prisma
+
+/generated/prisma
