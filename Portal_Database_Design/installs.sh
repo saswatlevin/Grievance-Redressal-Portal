@@ -84,6 +84,9 @@ CREATE DATABASE my_database;
 # Reconnect to Postgres to see if the Password has been set
 psql -h localhost -U postgres
 
+# Connect to postgres to a particular database
+psql -h localhost -U postgres -d my_database
+
 # =========CONFIGURE POSTGRES TO ACCEPT REMOTE CONNECTION========== #
 # PostgreSQL reads its configuration from the postgresql.conf file which is located in the /etc/postgresql/<version>/main/ directory
 sudo vi /etc/postgresql/17/main/postgresql.conf
@@ -132,3 +135,7 @@ echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/mwt-desktop.gpg] https://mirro
 ## Install Github Desktop for Ubuntu
 sudo apt update 
 sudo apt install github-desktop
+
+# =========INSTALL TYPESCRIPT AND JEST========== #
+sudo npm install -g typescript@5
+
