@@ -1,26 +1,62 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateChainDto } from './dto/create-chain.dto';
-import { UpdateChainDto } from './dto/update-chain.dto';
+import { UpdateChainAddressDto } from './dto/update-chain-address.dto';
+import { UpdateChainNameDto } from './dto/update-chain-name.dto';
 
 @Injectable()
 export class ChainsService {
-  create(createChainDto: CreateChainDto) {
-    return 'This action adds a new chain';
+
+  constructor(private readonly prisma: PrismaService) {}
+  
+  async create(createChainDto: CreateChainDto) {
+    
+    return this.prisma.chain.create({
+      data: createChainDto,
+    });
   }
 
-  findAll() {
-    return `This action returns all chains`;
+  async updateChainName(
+    chainId: bigint,
+    updateChainNameDto: UpdateChainNameDto,
+  ) {
+  return this.prisma.chain.update({
+    where: {
+      chain_id: chainId,
+    },
+    data: {
+      chain_name: updateChainNameDto.chain_name,
+    },
+  });
+  }
+  
+  async findAllChains() {
+    return this.prisma.chain.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} chain`;
+  async findOneChain(id: bigint) {
+    return this.prisma.chain.findUnique({
+    where: {
+      chain_id: id,
+    },
+  });
   }
 
-  update(id: number, updateChainDto: UpdateChainDto) {
-    return `This action updates a #${id} chain`;
+  async updateChainAddress(chainId: bigint, 
+    updateChainAddressDto: UpdateChainAddressDto) {
+    return this.prisma.chain.update({
+    where: {
+      chain_id: chainId,
+    },
+    data: updateChainAddressDto
+  })
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} chain`;
+  async removeChain(chainId: bigint) {
+    return this.prisma.chain.delete({
+    where: {
+      chain_id: chainId,
+    },
+  });
   }
 }
