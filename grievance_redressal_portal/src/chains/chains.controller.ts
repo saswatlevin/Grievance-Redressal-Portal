@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { UpdateChainNameDto } from './dto/update-chain-name.dto';
 import { ChainsService } from './chains.service';
 import { CreateChainDto } from './dto/create-chain.dto';
@@ -8,45 +8,50 @@ import { UpdateChainAddressDto } from './dto/update-chain-address.dto';
 export class ChainsController {
   constructor(private readonly chainsService: ChainsService) {}
 
-  @Post('createChain')
-  create(@Body() createChainDto: CreateChainDto) {
-    return this.chainsService.create(createChainDto);
+  @Post('create_chain')
+  createChain(@Body() createChainDto: CreateChainDto) {
+    return this.chainsService.createChain(createChainDto);
   }
 
-  @Get()
+  @Get('find_all_chains')
   findAllChains() {
+    console.log("In findAllChains");
     return this.chainsService.findAllChains();
   }
 
-  @Get(':id')
-  findOneChain(@Param('id') id: string) {
-    return this.chainsService.findOneChain(BigInt(id));
+  @Get('find_one_chain/:id')
+  findOneChain(@Param('id', ParseIntPipe) id: number) {
+    console.log("In findOneChain");
+    return this.chainsService.findOneChain(id);
   }
 
- @Patch(':id/name')
+@Patch('update_chain_name/:id')
 updateChainName(
-  @Param('id') id: string,
+  @Param('id', ParseIntPipe) id: number,
   @Body() updateChainNameDto: UpdateChainNameDto,
 ) {
+  console.log("In updateChainName");
   return this.chainsService.updateChainName(
-    BigInt(id),
+    id,
     updateChainNameDto,
   );
 }
 
-@Patch(':id/address')
+@Patch('update_chain_address/:id')
 updateChainAddress(
-  @Param('id') id: string,
+  @Param('id', ParseIntPipe) id: number,
   @Body() updateChainAddressDto: UpdateChainAddressDto,
 ) {
+  console.log("In updateChainAddress");
   return this.chainsService.updateChainAddress(
-    BigInt(id),
+    id,
     updateChainAddressDto,
   );
 }
 
-@Delete(':id/remove')
-  removeChain(@Param('id') id: string) {
-    return this.chainsService.removeChain(BigInt(id));
+@Delete('remove_chain/:id')
+  removeChain(@Param('id', ParseIntPipe) id: number) {
+    console.log("In removeChain");
+    return this.chainsService.removeChain(id);
   }
 }
