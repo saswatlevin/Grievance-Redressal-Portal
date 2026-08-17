@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { ValidationPipe } from '@nestjs/common';
 
 // Implements BigInt serialization
 // That is, allows the conversion of BigInt to JSON in the response.
@@ -8,7 +9,10 @@ import { AppModule } from './app.module';
 };
 
 async function bootstrap() {
+  
   const app = await NestFactory.create(AppModule);
+  // Calling the ValidationPipe middleware 
+  app.useGlobalPipes(new ValidationPipe());
   await app.listen(process.env.PORT ?? 3000);
 }
 
