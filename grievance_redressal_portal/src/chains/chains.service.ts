@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { CreateChainDto } from './dto/create-chain.dto';
 import { UpdateChainAddressDto } from './dto/update-chain-address.dto';
 import { UpdateChainNameDto } from './dto/update-chain-name.dto';
@@ -9,7 +9,7 @@ export class ChainsService {
 
   constructor(private readonly prisma: PrismaService) {}
   
-  async create(createChainDto: CreateChainDto) {
+  async createChain(createChainDto: CreateChainDto) {
     
     return this.prisma.chain.create({
       data: createChainDto,
@@ -17,7 +17,7 @@ export class ChainsService {
   }
 
   async updateChainName(
-    chainId: bigint,
+    chainId: number,
     updateChainNameDto: UpdateChainNameDto,
   ) {
   return this.prisma.chain.update({
@@ -34,7 +34,7 @@ export class ChainsService {
     return this.prisma.chain.findMany();
   }
 
-  async findOneChain(id: bigint) {
+  async findOneChain(id: number) {
     return this.prisma.chain.findUnique({
     where: {
       chain_id: id,
@@ -42,7 +42,7 @@ export class ChainsService {
   });
   }
 
-  async updateChainAddress(chainId: bigint, 
+  async updateChainAddress(chainId: number, 
     updateChainAddressDto: UpdateChainAddressDto) {
     return this.prisma.chain.update({
     where: {
@@ -52,7 +52,7 @@ export class ChainsService {
   })
   }
 
-  async removeChain(chainId: bigint) {
+  async removeChain(chainId: number) {
     return this.prisma.chain.delete({
     where: {
       chain_id: chainId,
