@@ -1,8 +1,8 @@
 {
   "name": "grievance_redressal_portal",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "An Internal Portal to resolve Grievances of Restaurant Clients.",
+  "author": "Saswat Levin",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
