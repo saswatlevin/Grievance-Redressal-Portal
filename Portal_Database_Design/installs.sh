@@ -139,3 +139,16 @@ sudo apt install github-desktop
 # =========INSTALL TYPESCRIPT AND JEST========== #
 sudo npm install -g typescript@5
 
+npx jest chains.service.spec.ts --watch
+npm test -- chains.service.spec.ts
+
+# Stray Commands
+SELECT MAX(chain_id) FROM chains;
+
+SELECT last_value FROM chains_chain_id_seq;
+
+# If last_value is lower than the maximum chain_id, reset the sequence:
+
+SELECT setval('chains_chain_id_seq', (SELECT MAX(chain_id) FROM chains));
+
+npm test -- chains.service.spec.ts --detectOpenHandles
