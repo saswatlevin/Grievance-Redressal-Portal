@@ -18,4 +18,3 @@ export const ADDRESS_COUNTRY_MAXIMUM_LENGTH = 100;
 
 export const ADDRESS_POST_CODE_REGEX = /^[A-Za-z0-9\- ]*$/;
 export const ADDRESS_POST_CODE_MAXIMUM_LENGTH = 12;
-
