@@ -219,6 +219,7 @@ INSERT INTO chains (chain_id, chain_date_created_at, chain_name, chain_headquart
 
 INSERT INTO chains (chain_id, chain_date_created_at, chain_name, chain_headquarters_address_room_no, chain_headquarters_address_building, chain_headquarters_address_street, chain_headquarters_address_city, chain_headquarters_address_admin_division, chain_headquarters_address_country, chain_headquarters_address_post_code) VALUES (3, NOW(), 'Road Cafe', '3130', '1st Floor Aldahna Building', '', 'Riyadh', 'Eastern Province', 'Saudi Arabia', '12815');
 
+INSERT INTO chains (chain_id, chain_date_created_at, chain_name, chain_headquarters_address_room_no, chain_headquarters_address_building, chain_headquarters_address_street, chain_headquarters_address_city, chain_headquarters_address_admin_division, chain_headquarters_address_country, chain_headquarters_address_post_code) VALUES (4, NOW(), 'Test Chain', '12', 'Test Building', 'Test Street', 'Test City', 'Test Division', 'India', '560001');
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 INSERT INTO outlets (outlet_id, outlet_date_created_at, outlet_name, outlet_address_room_no, outlet_address_building, outlet_address_street, outlet_address_city, outlet_address_admin_division, outlet_address_country, outlet_address_post_code, chain_id) VALUES (1, NOW(), 'Tim Hortons #1', '', 'Petromin', 'Eastern Ring Road', 'Riyadh', 'Eastern Province', 'Saudi Arabia', '12824', 1);
 
