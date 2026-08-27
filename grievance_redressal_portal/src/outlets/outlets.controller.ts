@@ -23,27 +23,32 @@ export class OutletsController {
 
   @Post('search_outlets_by_name')
   searchOutletsByName(@Body() searchOutletDto: SearchOutletDto) {
+    console.log('In searchOutletsByName');
     return this.outletsService.searchOutletsByName(searchOutletDto);
   }
 
   // ParseIntPipe validates the fact that the _id is an Integer.
   @Get('find_one_outlet/:outlet_id')
   findOneOutlet(@Param('outlet_id', ParseIntPipe) outlet_id: number) {
+    console.log('In findOneOutlet');
     return this.outletsService.findOneOutlet(outlet_id);
   }
 
   @Patch('update_outlet_name/:outlet_id')
   updateOutletName(@Param('outlet_id', ParseIntPipe) outlet_id: number, @Body() updateOutletNameDto: UpdateOutletNameDto) {
+    console.log('In updateOutletName');
     return this.outletsService.updateOutletName(outlet_id, updateOutletNameDto);
   }
 
   @Patch('update_outlet_address/:outlet_id')
   updateOutletAddress(@Param('outlet_id', ParseIntPipe) outlet_id: number, @Body() updateOutletAddressDto: UpdateOutletAddressDto) {
+    console.log('In updateOutletAddress');
     return this.outletsService.updateOutletAddress(outlet_id, updateOutletAddressDto);
   }
 
   @Delete('remove_outlet/:outlet_id')
   removeOutlet(@Param('outlet_id', ParseIntPipe) outlet_id: number) {
+    console.log('In removeOutlet');
     return this.outletsService.removeOutlet(outlet_id);
   }
 }
