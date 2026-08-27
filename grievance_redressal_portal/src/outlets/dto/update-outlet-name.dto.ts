@@ -4,11 +4,6 @@ import {OUTLET_NAME_REGEX, OUTLET_NAME_MAXIMUM_LENGTH} from '../outlets.constant
 
 export class UpdateOutletNameDto  {
     @ApiProperty()
-    @IsInt()
-    @IsNotEmpty()
-    outlet_id!: number;
-
-    @ApiProperty()
     @IsString()
     @IsNotEmpty()
     @MaxLength(OUTLET_NAME_MAXIMUM_LENGTH)
