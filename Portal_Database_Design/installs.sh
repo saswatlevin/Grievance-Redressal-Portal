@@ -144,11 +144,12 @@ npm test -- chains.service.spec.ts
 
 # Stray Commands
 SELECT MAX(chain_id) FROM chains;
-
 SELECT last_value FROM chains_chain_id_seq;
-
 # If last_value is lower than the maximum chain_id, reset the sequence:
-
 SELECT setval('chains_chain_id_seq', (SELECT MAX(chain_id) FROM chains));
+
+SELECT MAX(outlet_id) FROM outlets;
+SELECT last_value FROM outlets_outlet_id_seq;
+SELECT setval('outlets_outlet_id_seq', (SELECT MAX(outlet_id) FROM outlets));
 
 npm test -- chains.service.spec.ts --detectOpenHandles
