@@ -232,6 +232,10 @@ INSERT INTO outlets (outlet_id, outlet_date_created_at, outlet_name, outlet_addr
 INSERT INTO outlets (outlet_id, outlet_date_created_at, outlet_name, outlet_address_room_no, outlet_address_building, outlet_address_street, outlet_address_city, outlet_address_admin_division, outlet_address_country, outlet_address_post_code, chain_id) VALUES (5, NOW(), 'Graph Cafe #1', '', '', 'Dhahran–Jubail Branch Road', 'Dammam', 'Eastern Province', 'Saudi Arabia', '32272', 2);
 
 INSERT INTO outlets (outlet_id, outlet_date_created_at, outlet_name, outlet_address_room_no, outlet_address_building, outlet_address_street, outlet_address_city, outlet_address_admin_division, outlet_address_country, outlet_address_post_code, chain_id) VALUES (6, NOW(), 'Graph Cafe #2', '', '', 'Alnuman Ibn Harithah Street', 'Al-Khobar', 'Eastern Province', 'Saudi Arabia', '34714', 2);
+
+INSERT INTO outlets (outlet_date_created_at, outlet_name, outlet_address_room_no, outlet_address_building, outlet_address_street, outlet_address_city, outlet_address_admin_division, outlet_address_country, outlet_address_post_code, chain_id) VALUES (NOW(), 'Tim Hortons Test Outlet', '4', 'Test Building', 'Test Street', 'Test City', 'Test Division', 'Saudi Arabia', '123456', 1);
+
+INSERT INTO outlets (outlet_date_created_at, outlet_name, outlet_address_room_no, outlet_address_building, outlet_address_street, outlet_address_city, outlet_address_admin_division, outlet_address_country, outlet_address_post_code, chain_id) VALUES (NOW(), 'Independent Test Outlet', '4', 'Test Building 2', 'Test Street 2', 'Test City Two', 'Test Division Two', 'Saudi Arabia', '123456', NULL);
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 INSERT INTO posts (post_id, post_date_created_at, post_content, user_id, post_status) VALUES (1, NOW(), 'ABC Post One', 1, 'open');
 INSERT INTO posts (post_id, post_date_created_at, post_content, user_id, post_status) VALUES (2, NOW(), 'ABC Post Two', 1, 'open');
