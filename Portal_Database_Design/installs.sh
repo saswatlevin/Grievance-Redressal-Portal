@@ -153,3 +153,13 @@ SELECT last_value FROM outlets_outlet_id_seq;
 SELECT setval('outlets_outlet_id_seq', (SELECT MAX(outlet_id) FROM outlets));
 
 npm test -- chains.service.spec.ts --detectOpenHandles
+
+# Do a Prisma migration
+# npx prisma migrate dev --name <name_of_migration>
+npx prisma migrate dev --name add_post_title
+
+# After that, mandatorily run "npx prisma generate" to generate the new Prisma Client.
+npx prisma generate  
+
+# Check the prisma migration status using "npx prisma migrate status"
+npx prisma migrate status
