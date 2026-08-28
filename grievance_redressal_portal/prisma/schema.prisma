@@ -25,6 +25,7 @@ enum PostStatus {
 model Post {
 	post_id                Int          @id @default(autoincrement())
 	post_date_created_at   DateTime     @default(now()) @db.Timestamptz
+	post_title             String       @db.VarChar(500) @default("DEFAULT POST TITLE")
 	post_content           String       @db.VarChar(20000)
 	user_id                Int       
 	post_status            PostStatus   @default(open)
