@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "posts" ADD COLUMN     "post_title" VARCHAR(500) NOT NULL DEFAULT 'DEFAULT POST TITLE';
