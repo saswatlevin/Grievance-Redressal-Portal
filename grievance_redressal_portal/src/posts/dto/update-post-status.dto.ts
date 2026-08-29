@@ -1,0 +1,8 @@
+import { PartialType, OmitType } from '@nestjs/swagger';
+import { CreatePostDto } from './create-post.dto';
+
+// Using PartialType allows only some fields to be updated.
+// Using OmitType allows the necessary fields to be omitted.
+export class UpdatePostStatusDto extends PartialType(
+  OmitType(CreatePostDto, ['post_title', 'post_content', 'user_id'] as const),
+) {}
