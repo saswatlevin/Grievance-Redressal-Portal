@@ -443,7 +443,7 @@ chosen_test_url = None
 chosen_test_data = None
 chosen_test_serial = None
 
-test_menu_name = "======CHAIN INTEGRATION TEST MENU======"
+test_menu_name = "======OUTLET INTEGRATION TEST MENU======"
 
 while user_choice != 0:
     userMenuDisplay(test_menu_name, outlet_test_data_list)
