@@ -28,13 +28,6 @@ lerna-debug.log*
 .settings/
 *.sublime-workspace
 
-# Unused Directories / Files
-skills-lock.json
-.agents
-.claude
-.windsurf
-
-
 # IDE - VSCode
 .vscode/*
 !.vscode/settings.json
