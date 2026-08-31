@@ -18,11 +18,13 @@ export class PostsController {
 
   @Get('find_all_posts')
   findAllPosts() {
+    console.log("In findAllPosts");
     return this.postsService.findAllPosts();
   }
 
   @Get('find_one_post/:post_id')
-  findOnePost(@Param('post_id') post_id: number) {
+  findOnePost(@Param('post_id', ParseIntPipe) post_id: number) {
+    console.log("In findOnePost");
     return this.postsService.findOnePost(post_id);
   }
 
@@ -51,7 +53,7 @@ export class PostsController {
   }
 
   @Delete('remove_post/:post_id')
-  removePost(@Param('post_id') post_id: number) {
+  removePost(@Param('post_id', ParseIntPipe) post_id: number) {
     console.log("In removePost");
     return this.postsService.removePost(post_id);
   }
