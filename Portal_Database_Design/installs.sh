@@ -152,6 +152,10 @@ SELECT MAX(outlet_id) FROM outlets;
 SELECT last_value FROM outlets_outlet_id_seq;
 SELECT setval('outlets_outlet_id_seq', (SELECT MAX(outlet_id) FROM outlets));
 
+SELECT MAX(post_id) FROM posts;
+SELECT last_value FROM posts_post_id_seq;
+SELECT setval('posts_post_id_seq', (SELECT MAX(post_id) FROM posts));
+
 npm test -- chains.service.spec.ts --detectOpenHandles
 
 # Do a Prisma migration
