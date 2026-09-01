@@ -167,3 +167,9 @@ npx prisma generate
 
 # Check the prisma migration status using "npx prisma migrate status"
 npx prisma migrate status
+
+# Creating an empty migration in Prisma
+npx prisma migrate dev --create-only --name remove_deleted_comment_content_trigger
+
+# We then add the necessary SQL statements inside the empty migration.sql file and execute the migration using
+npx prisma migrate dev  
