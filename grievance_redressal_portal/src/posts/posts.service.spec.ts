@@ -3,6 +3,7 @@ import { PostsService } from './posts.service';
 import { PrismaModule } from '../prisma/prisma.module';
 import { PrismaService } from '../prisma/prisma.service';
 
+ // Remember to delete the duplicate posts created in the database after the tests.
 describe('PostsService', () => {
   let service: PostsService;
   let prisma: PrismaService;
