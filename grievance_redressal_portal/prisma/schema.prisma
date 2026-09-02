@@ -60,6 +60,8 @@ model Comment {
 	reply                     Comment?     @relation("CommentReplies", fields: [reply_id], references: [comment_id], onDelete: SetNull)
 	replies                   Comment[]    @relation("CommentReplies")
 
+	@@unique([comment_id, reply_id])
+
 	@@map("comments")
 }
 
