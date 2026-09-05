@@ -173,3 +173,7 @@ npx prisma migrate dev --create-only --name remove_deleted_comment_content_trigg
 
 # We then add the necessary SQL statements inside the empty migration.sql file and execute the migration using
 npx prisma migrate dev  
+
+# Creating a shared uniqueness constraint between comment_id and reply_id in the Comments table
+npx prisma migrate dev --name add_comment_reply_unique_constraint
+npx prisma generate
