@@ -4,7 +4,6 @@ import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentContentDto } from './dto/update-comment-content.dto';
 import { SoftDeleteCommentDto } from './dto/soft-delete-comment.dto';
 import { SoftDeleteReplyDto } from './dto/soft-delete-reply.dto';
-import { HardDeleteReplyDto } from './dto/hard-delete-reply.dto';
 import { SearchCommentsByPostDto } from './dto/search-comments-by-post.dto';
 import { CreateReplyDto } from './dto/create-reply.dto';
 
@@ -39,10 +38,12 @@ export class CommentsService {
       `;
       }
     
-      async updateCommentContent(commentId: number, updateCommentContentDto: UpdateCommentContentDto) {
-         return this.prisma.comment.update({
+      async updateCommentContent(commentId: number, parentCommentId: number, updateCommentContentDto: UpdateCommentContentDto) {
+        
+        return this.prisma.comment.update({
           where: {
             comment_id: commentId,
+            parent_comment_id: parentCommentId
           },
           data: updateCommentContentDto
         })
@@ -57,10 +58,11 @@ export class CommentsService {
         })
       }
 
-      async softDeleteReply(commentId: number, softDeleteReplyDto: SoftDeleteReplyDto) {
+      async softDeleteReply(commentId: number, parentCommentId: number, softDeleteReplyDto: SoftDeleteReplyDto) {
          return this.prisma.comment.update({
           where: {
             comment_id: commentId,
+            parent_comment_id: parentCommentId
           },
           data: softDeleteReplyDto
         })
@@ -74,11 +76,11 @@ export class CommentsService {
       });
     }
 
-    async hardDeleteReply(commentId: number, hardDeleteReplyDto: HardDeleteReplyDto) {
+    async hardDeleteReply(commentId: number, parentCommentId: number) {
         return this.prisma.comment.delete({
         where: {
           comment_id: commentId,
-          reply_id: hardDeleteReplyDto.reply_id
+          parent_comment_id: parentCommentId
         },
       })
     }
