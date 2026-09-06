@@ -3,7 +3,6 @@ import { PrismaService } from '../prisma/prisma.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentContentDto } from './dto/update-comment-content.dto';
 import { SoftDeleteCommentDto } from './dto/soft-delete-comment.dto';
-import { SoftDeleteReplyDto } from './dto/soft-delete-reply.dto';
 import { SearchCommentsByPostDto } from './dto/search-comments-by-post.dto';
 import { CreateReplyDto } from './dto/create-reply.dto';
 
@@ -18,12 +17,14 @@ export class CommentsService {
       }
 
      async createReply(createReplyDto: CreateReplyDto) {
-        ;
+      return this.prisma.comment.create({
+        data: createReplyDto
+      });
      }
     
       async displayAllPostComments(postId: number) {
         return this.prisma.$queryRaw`
-        SELECT comment_content, comment_is_deleted
+        SELECT comment_id, parent_id, comment_date_created_at, comment_content, comment_is_deleted
         FROM comments
         WHERE comments.post_id = ${postId};
       `;
@@ -31,22 +32,23 @@ export class CommentsService {
 
       async searchCommentsByPost(postId: number, searchCommentsByPostDto: SearchCommentsByPostDto) {
         return this.prisma.$queryRaw`
-        SELECT comment_content, comment_is_deleted 
+        SELECT comment_id, parent_id, comment_date_created_at, comment_content, comment_is_deleted
         FROM comments 
         WHERE post_id = ${postId} 
         AND comment_content ILIKE ${searchCommentsByPostDto.comment_content + '%'};
       `;
       }
     
-      async updateCommentContent(commentId: number, parentCommentId: number, updateCommentContentDto: UpdateCommentContentDto) {
-        
-        return this.prisma.comment.update({
-          where: {
-            comment_id: commentId,
-            parent_comment_id: parentCommentId
-          },
-          data: updateCommentContentDto
-        })
+      async updateCommentContent(commentId: number, updateCommentContentDto: UpdateCommentContentDto) {
+
+         return this.prisma.comment.update({
+            where: {
+              comment_id: commentId
+            },
+            data: updateCommentContentDto
+          });
+         
+                
       }
     
       async softDeleteComment(commentId: number, softDeleteCommentDto: SoftDeleteCommentDto) {
@@ -55,17 +57,7 @@ export class CommentsService {
             comment_id: commentId,
           },
           data: softDeleteCommentDto
-        })
-      }
-
-      async softDeleteReply(commentId: number, parentCommentId: number, softDeleteReplyDto: SoftDeleteReplyDto) {
-         return this.prisma.comment.update({
-          where: {
-            comment_id: commentId,
-            parent_comment_id: parentCommentId
-          },
-          data: softDeleteReplyDto
-        })
+        });
       }
     
       async hardDeleteComment(commentId: number) {
@@ -74,15 +66,6 @@ export class CommentsService {
           comment_id: commentId,
         },
       });
-    }
-
-    async hardDeleteReply(commentId: number, parentCommentId: number) {
-        return this.prisma.comment.delete({
-        where: {
-          comment_id: commentId,
-          parent_comment_id: parentCommentId
-        },
-      })
     }
 
 }
