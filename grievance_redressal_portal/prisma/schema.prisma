@@ -54,10 +54,10 @@ model Comment {
 	comment_is_deleted        Boolean      @default(false)
 	post_id                   Int
 	user_id                   Int
-	parent_comment_id         Int?
+	parent_id                 Int?
 	post                      Post         @relation(fields: [post_id], references: [post_id], onDelete: Cascade)
 	user                      User         @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
-	reply                     Comment?     @relation("CommentReplies", fields: [parent_comment_id], references: [comment_id], onDelete: SetNull)
+	reply                     Comment?     @relation("CommentReplies", fields: [parent_id], references: [comment_id], onDelete: SetNull)
 	replies                   Comment[]    @relation("CommentReplies")
 
 	@@map("comments")
