@@ -33,5 +33,5 @@ export class CommentUniversalDto {
     @ApiProperty()
     @IsNotEmpty()
     @IsInt()
-    parent_comment_id!: number;
+    parent_id!: number;
 }
