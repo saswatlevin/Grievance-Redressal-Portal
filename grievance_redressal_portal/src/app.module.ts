@@ -6,9 +6,10 @@ import { PrismaModule } from './prisma/prisma.module';
 import { ChainsModule } from './chains/chains.module';
 import { OutletsModule } from './outlets/outlets.module';
 import { PostsModule } from './posts/posts.module';
+import { CommentsModule } from './comments/comments.module';
 
 @Module({
-  imports: [UsersModule, PrismaModule, ChainsModule, OutletsModule, PostsModule],
+  imports: [UsersModule, PrismaModule, ChainsModule, OutletsModule, PostsModule, CommentsModule],
   controllers: [AppController],
   providers: [AppService],
 })

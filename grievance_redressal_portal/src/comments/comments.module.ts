@@ -8,4 +8,4 @@ import { CommentsService } from './comments.service';
     providers: [CommentsService],
     imports: [PrismaModule]
 })
-export class Commentsodule {}
+export class CommentsModule {}
