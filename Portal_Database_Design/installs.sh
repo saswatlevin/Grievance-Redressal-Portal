@@ -177,3 +177,13 @@ npx prisma migrate dev
 # Creating a shared uniqueness constraint between comment_id and reply_id in the Comments table
 npx prisma migrate dev --name add_comment_reply_unique_constraint
 npx prisma generate
+
+# Removing the uniqueness constraint on comment_id and reply_id
+# Renaming reply_id to parent_comment_id
+# Already manually deleted all comments from the comments table in the database
+npx prisma migrate dev --name remove_comment_reply_unique_constraint_rename_reply_id_to_parent_comment_id
+npx prisma generate
+
+# Rename the parent_comment_id to parent_id
+npx prisma migrate dev --name rename_parent_comment_id_to_parent_id
+npx prisma generate
