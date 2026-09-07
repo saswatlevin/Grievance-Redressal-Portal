@@ -245,16 +245,33 @@ INSERT INTO posts (post_id, post_date_created_at, post_content, user_id, post_st
 INSERT INTO posts (post_id, post_date_created_at, post_content, user_id) VALUES (6, NOW(), 'JULF Post One', 9);
 INSERT INTO posts (post_id, post_date_created_at, post_content, user_id) VALUES (7, NOW(), 'JULF Post Two', 9);
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-INSERT INTO comments (comment_id, comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, reply_id) VALUES (1, NOW(), 'ABC Post One Comment One', false, 1, 1, NULL);
-INSERT INTO comments (comment_id, comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, reply_id) VALUES (2, NOW(), 'ABC Post One Comment One Reply One', false, 1, 1, 1);
-INSERT INTO comments (comment_id, comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, reply_id) VALUES (3, NOW(), 'ABC Post One Comment One Reply Two', false, 1, 1, 1);
-INSERT INTO comments (comment_id, comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, reply_id) VALUES (4, NOW(), 'ABC Post One Comment Two', false, 1, 1, NULL);
-INSERT INTO comments (comment_id, comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, reply_id) VALUES (5, NOW(), 'ABC Post One Comment Two Reply One', false, 1, 1, 4);
-INSERT INTO comments (comment_id, comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, reply_id) VALUES (6, NOW(), 'ABC Post One Comment Two Reply Two', false, 1, 1, 4);
-INSERT INTO comments (comment_id, comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, reply_id) VALUES (7, NOW(), 'STU Post One Comment One', false, 4, 7, NULL);
-INSERT INTO comments (comment_id, comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, reply_id) VALUES (8, NOW(), 'STU Post One Comment Two', false, 4, 7, NULL);
-INSERT INTO comments (comment_id, comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, reply_id) VALUES (9, NOW(), 'STU Post One Comment Two Reply One', false, 4, 7, 8);
-INSERT INTO comments (comment_id, comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, reply_id) VALUES (10, NOW(), 'STU Post One Comment Two Reply Two', false, 4, 7, 8);
+INSERT INTO comments (comment_id, comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, parent_id) VALUES (1, NOW(), 'Original Comment', false, 4, 7, NULL);
+
+INSERT INTO comments (comment_id, comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, parent_id) VALUES (2, NOW(), 'Reply ONE to comment with comment_id 1', false, 4, 7, 1);
+
+INSERT INTO comments (comment_id, comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, parent_id) VALUES (3, NOW(), 'Reply TWO to comment with comment_id 1', false, 4, 8, 1);
+
+INSERT INTO comments (comment_id, comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, parent_id) VALUES (4, NOW(), 'Reply ONE to comment with comment_id 2 ', false, 4, 7, 2);
+
+INSERT INTO comments (comment_id, comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, parent_id) VALUES (5, NOW(), 'Reply TWO to comment with  comment_id 2', false, 4, 8, 2);
+
+INSERT INTO comments (comment_id, comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, parent_id) VALUES (6, NOW(), 'Reply THREE to comment with comment_id 1', false, 4, 8, 1);
+
+INSERT INTO comments (comment_id, comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, parent_id) VALUES (7, NOW(), 'Reply THREE to comment with comment_id 2', false, 4, 7, 2);
+
+INSERT INTO comments (comment_id, comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, parent_id) VALUES (8, NOW(), 'Reply ONE to comment with comment_id 3', false, 4, 8, 3);
+
+INSERT INTO comments (comment_id, comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, parent_id) VALUES (9, NOW(), 'A comment without any replies (comment_id 9)', false, 7, 9, NULL);
+
+INSERT INTO comments (comment_id, comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, parent_id) VALUES (10, NOW(), 'Reply ONE to comment with comment_id 9', false, 7, 10, 9);
+
+INSERT INTO comments (comment_id, comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, parent_id) VALUES (11, NOW(), 'Reply ONE to comment with comment_id 10', false, 7, 9, 10);
+
+INSERT INTO comments (comment_id, comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, parent_id) VALUES (12, NOW(), 'Reply TWO to comment with comment_id 9', false, 7, 9, 9);
+
+INSERT INTO comments (comment_id, comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, parent_id) VALUES (13, NOW(), 'Reply TWO to comment with comment_id 10', false, 7, 10, 10);
+
+INSERT INTO comments (comment_id, comment_date_created_at, comment_content, comment_is_deleted, post_id, user_id, parent_id) VALUES (14, NOW(), 'Reply ONE to comment with comment_id 4', false, 4, 7, 4);
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 INSERT INTO images (image_id, image_date_created_at, image_path, image_tag, post_id) VALUES (1, NOW(), '/images/stu_post_1_image_1', NULL, 4);
 INSERT INTO images (image_id, image_date_created_at, image_path, image_tag, post_id) VALUES (2, NOW(), '/images/stu_post_1_image_2', NULL, 4);
