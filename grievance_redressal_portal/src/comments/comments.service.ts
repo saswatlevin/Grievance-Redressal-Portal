@@ -35,7 +35,7 @@ export class CommentsService {
         SELECT comment_id, parent_id, comment_date_created_at, comment_content, comment_is_deleted
         FROM comments 
         WHERE post_id = ${postId} 
-        AND comment_content ILIKE ${searchCommentsByPostDto.comment_content + '%'};
+        AND comment_content ILIKE ${'%' + searchCommentsByPostDto.comment_content + '%'};
       `;
       }
     
