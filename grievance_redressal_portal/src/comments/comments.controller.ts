@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { CommentsService } from './comments.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
+import { CreateReplyDto } from './dto/create-reply.dto';
 import { UpdateCommentContentDto } from './dto/update-comment-content.dto';
 import { SoftDeleteCommentDto } from './dto/soft-delete-comment.dto';
 import { SearchCommentsByPostDto } from './dto/search-comments-by-post.dto';
@@ -14,6 +15,12 @@ export class CommentsController {
     createComment(@Body() createCommentDto: CreateCommentDto) {
         console.log("In createComment");
         return this.commentsService.createComment(createCommentDto);
+    }
+
+    @Post('create_reply')
+    createReply(@Body() createReplyDto: CreateReplyDto) {
+        console.log("In createReply");
+        return this.commentsService.createReply(createReplyDto);
     }
 
     @Get('display_all_post_comments/:post_id')
