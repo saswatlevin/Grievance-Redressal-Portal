@@ -156,7 +156,14 @@ SELECT MAX(post_id) FROM posts;
 SELECT last_value FROM posts_post_id_seq;
 SELECT setval('posts_post_id_seq', (SELECT MAX(post_id) FROM posts));
 
+SELECT MAX(comment_id) FROM comments;
+SELECT last_value FROM comments_comment_id_seq;
+SELECT setval('comments_comment_id_seq', (SELECT MAX(comment_id) FROM comments));
+
 npm test -- chains.service.spec.ts --detectOpenHandles
+npm test -- outlets.service.spec.ts --detectOpenHandles
+npm test -- posts.service.spec.ts --detectOpenHandles
+npm test -- comments.service.spec.ts --detectOpenHandles
 
 # Do a Prisma migration
 # npx prisma migrate dev --name <name_of_migration>
