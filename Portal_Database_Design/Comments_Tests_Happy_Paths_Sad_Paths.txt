@@ -1,0 +1,49 @@
+### Happy path tests
+
+* Serial 2: Test to check response to create a comment for user_id 7 post_id 4 using CREATE_COMMENT [ENTITY - INTEGRITY]
+* Serial 7: Test to check response to create a reply to comment with comment_id 15 for user_id 7, post_id 4 and parent_id 15 using CREATE_REPLY [REFERENTIAL - INTEGRITY]
+* Serial 8: Test to check response to create another reply to comment with comment_id 15 for user_id 7, post_id 4 and parent_id 15 using CREATE_REPLY [REFERENTIAL - INTEGRITY]
+* Serial 12: Test to update the comment_content of comment with comment_id 15 using UPDATE_COMMENT_CONTENT [DTO]
+* Serial 13: Test to update the comment_content of comment with comment_id 16 using UPDATE_COMMENT_CONTENT [DTO]
+* Serial 16: Test to soft-delete comment with comment_id 15 using SOFT_DELETE_COMMENT
+* Serial 19: Test to hard-delete comment with comment_id 15 using HARD_DELETE_COMMENT 
+* Serial 20: Test to hard-delete comment with comment_id 16 using HARD_DELETE_COMMENT [REFERENTIAL - INTEGRITY]
+* Serial 22: Test to display all comments of post with post_id 4 using DISPLAY_ALL_POST_COMMENTS
+* Serial 24: Test to search for comments by post_id 4 and comment_content P using SEARCH_COMMENTS_BY_POST
+* Serial 25: Test to search for comments by post_id 4 and comment_content c using SEARCH_COMMENTS_BY_POST
+* Serial 26: Test to search for comments by post_id 4 and comment_content co using SEARCH_COMMENTS_BY_POST
+* Serial 27: Test to search for comments by post_id 4 and comment_content e using SEARCH_COMMENTS_BY_POST
+* Serial 28: Test to search for comments by post_id 4 and comment_content ep using SEARCH_COMMENTS_BY_POST
+* Serial 29: Test to search for comments by post_id 4 and comment_content a using SEARCH_COMMENTS_BY_POST
+* Serial 30: Test to search for comments by post_id 4 and comment_content bc using SEARCH_COMMENTS_BY_POST
+
+**Happy paths: 16**
+
+### Sad path tests
+
+* Serial 1: Test to check response to empty object in CREATE_COMMENT [DTO]
+* Serial 3: Test to check response to create a comment with unsupported characters in comment_content for user_id 7 post_id 4 using CREATE_COMMENT [DTO]
+* Serial 4: Test to check response to create a comment for user_id NULL post_id 4 using CREATE_COMMENT [DTO]
+* Serial 5: Test to check response to create a comment for user_id 7 post_id NULL using CREATE_COMMENT [DTO]
+* Serial 6: Test to check response to empty object in CREATE_REPLY [DTO]
+* Serial 9: Test to check response to create a reply to comment with comment_id 15 for user_id NULL, post_id 4 and parent_id 15 using CREATE_REPLY [DTO]
+* Serial 10: Test to check response to create a reply to comment with comment_id 15 for user_id 7, post_id NULL and parent_id 15 using CREATE_REPLY [DTO]
+* Serial 11: Test to check response to create a reply to comment with comment_id 15 for user_id 7, post_id 4 and parent_id NULL using CREATE_REPLY [DTO]
+* Serial 14: Test to update the comment_content with empty request body using UPDATE_COMMENT_CONTENT [DTO]
+* Serial 15: Test to update the comment_content with NULL comment_id using UPDATE_COMMENT_CONTENT [DTO]
+* Serial 17: Test to soft-delete comment with NULL comment_is_deleted value using SOFT_DELETE_COMMENT [DTO]
+* Serial 18: Test to soft-delete comment with comment_id NULL using SOFT_DELETE_COMMENT [URL]
+* Serial 21: Test to hard-delete comment with comment_id NULL using HARD_DELETE_COMMENT [URL]
+* Serial 23: Test to display all comments of post with post_id NULL using DISPLAY_ALL_POST_COMMENTS [URL]
+DTB - 1. should fail when creating a comment for a non-existent post [REFERENTIAL - INTEGRITY]
+DTB - 2. should fail when creating a comment for a non-existent user [REFERENTIAL - INTEGRITY]
+DTB - 3. should fail when updating a non-existent comment [ENTITY - INTEGRITY]
+DTB - 4. should fail when soft-deleting a non-existent comment [ENTITY - INTEGRITY]
+DTB - 5. should fail when hard-deleting a non-existent comment [ENTITY - INTEGRITY]
+DTB - 6. should return an empty array when displaying comments from a non-existent post
+DTB - 7. should return an empty array when searching comments in a non-existent post
+DTB - 8. should fail when creating a reply to a non-existent comment [REFERENTIAL - INTEGRITY]
+
+**Sad paths: 14**
+
+**Total: 30 tests**

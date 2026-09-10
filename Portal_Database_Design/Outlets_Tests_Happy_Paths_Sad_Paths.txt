@@ -1,0 +1,54 @@
+### Happy paths — 18
+
+* Serial 2: Test to create an outlet with all non-null attributes in CREATE_OUTLET [ENTITY - INTEGRITY]
+* Serial 8: Test to update outlet_name to UPDATED TIM HORTON'S TEST OUTLET NAME in UPDATE_OUTLET_NAME [DTO]
+* Serial 9: Test to update outlet_name to UPDATED TIM HORTON'S TEST OUTLET NAME1 in UPDATE_CHAIN_NAME [DTO]
+* Serial 10: Test to update outlet_name to 1234 in UPDATE_OUTLET_NAME [DTO]
+* Serial 11: Test to update the outlet address room_number to 11 in UPDATE_OUTLET_ADDRESS [DTO]
+* Serial 13: Test to update the outlet address building to TEST BUILDING in UPDATE_OUTLET_ADDRESS [DTO]
+* Serial 15: Test to update the outlet address street to TEST STREET in UPDATE_OUTLET_ADDRESS [DTO]
+* Serial 17: Test to update the outlet address city to TEST CITY in UPDATE_OUTLET_ADDRESS [DTO]
+* Serial 19: Test to update the outlet address administrative division to TEST DIVISION in UPDATE_OUTLET_ADDRESS [DTO]
+* Serial 21: Test to update the outlet address country to United Arab Emirates in UPDATE_OUTLET_ADDRESS [DTO]
+* Serial 23: Test to update the outlet address post code to 123456 in UPDATE_OUTLET_ADDRESS [DTO]
+* Serial 26: Test to delete the outlet with outlet_id 7 in REMOVE_OUTLET [REFERENTIAL - INTEGRITY]
+* Serial 27: Test to search for T in SEARCH_OUTLETS_BY_NAME 
+* Serial 28: Test to search for Ti in SEARCH_OUTLETS_BY_NAME 
+* Serial 29: Test to search for Tim in SEARCH_OUTLETS_BY_NAME 
+* Serial 30: Test to search for Tim's in SEARCH_OUTLETS_BY_NAME 
+* Serial 31: Test to search for Ts in SEARCH_OUTLETS_BY_NAME
+* Serial 33: Test to search for an outlet with outlet_id 8 in FIND_ONE_OUTLET
+DTB - 2. should update Independent Test Outlet chain_id to 2 [REFERENTIAL - INTEGRITY]
+DTB - 3. should update Independent Test Outlet chain_id to NULL [REFERENTIAL - INTEGRITY]
+DTB - 4. should update Tim Hortons Test Outlet 2 outlet_name [DTO]
+DTB - 5. should update outlet_address_room_no to NULL [DTO]
+DTB - 6. should update outlet_address_room_no from NULL to 6 [DTO]
+DTB - 7. should update Tim Hortons Test Outlet 2 chain_id to 2 [REFERENTIAL - INTEGRITY]
+DTB - 9. should delete Tim Hortons Test Outlet 2 [REFERENTIAL - INTEGRITY]
+
+### Sad paths — 16
+
+* Serial 1: Test to check response to empty object in CREATE_OUTLET
+* Serial 3: Test to create an outlet with an empty outlet_name in CREATE_OUTLET [DTO]
+* Serial 4: Test to create an outlet with an empty outlet_address_city in CREATE_OUTLET [DTO]
+* Serial 5: Test to create an outlet with an empty outlet_address_post_code in CREATE_OUTLET [DTO]
+* Serial 6: Test to create an outlet for a chain that does not exist in CREATE_OUTLET [DTO]
+* Serial 7: Test to check response to empty object in UPDATE_OUTLET_NAME
+* Serial 12: Test to update the outlet address room_number to AA in UPDATE_CHAIN_ADDRESS [DTO]
+* Serial 14: Test to update the outlet address building to TEST#BUILDING in UPDATE_OUTLET_ADDRESS [DTO]
+* Serial 16: Test to update the outlet address street to TEST#STREET in UPDATE_OUTLET_ADDRESS [DTO]
+* Serial 18: Test to update the outlet address city to TEST#CITY in UPDATE_OUTLET_ADDRESS [DTO]
+* Serial 20: Test to update the outlet address administrative division to TEST#9DIVISION in UPDATE_OUTLET_ADDRESS [DTO]
+* Serial 22: Test to update the outlet address country to United8Arab Emirates in UPDATE_OUTLET_ADDRESS [DTO]
+* Serial 24: Test to update the outlet address post code to 123-456 in UPDATE_OUTLET_ADDRESS [DTO]
+* Serial 32: Test to search for an outlet with outlet_id 9 in FIND_ONE_OUTLET 
+* Serial 25: Test to delete the outlet with outlet_id 10 in REMOVE_OUTLET [REFERENTIAL - INTEGRITY]
+DTB - 1. should reject an outlet with a duplicate outlet_name [ENTITY - INTEGRITY]
+DTB - 8. should reject setting outlet_name to NULL [DTO]
+
+
+### Total
+
+**Happy paths: 18**
+**Sad paths: 16**
+**Total: 34**

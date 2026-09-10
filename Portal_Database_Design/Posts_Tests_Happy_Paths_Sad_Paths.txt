@@ -1,0 +1,40 @@
+### Happy paths — 13
+
+* Serial 2: Test to create a post using CREATE_POST
+* Serial 3: Test to create another post using CREATE_POST
+* Serial 6: Test to update the post_title of JULF Test Post to JULF TEST POST using UPDATE_POST_TITLE [DTO]
+* Serial 9: Test to update the post_content of JULF TEST POST to Updated test post for user JULF using UPDATE_POST_CONTENT [DTO]
+* Serial 12: Test to update the post_status of JULF TEST POST to resolved using UPDATE_POST_STATUS [DTO]
+* Serial 14: Test to search for empty using SEARCH_POSTS_BY_TITLE [DTO]
+* Serial 15: Search for D in SEARCH_POSTS_BY_TITLE
+* Serial 16: Search for DE in SEARCH_POSTS_BY_TITLE
+* Serial 17: Search for DEF in SEARCH_POSTS_BY_TITLE
+* Serial 18: Search for Post in SEARCH_POSTS_BY_TITLE
+* Serial 19: Search for POST in SEARCH_POSTS_BY_TITLE
+* Serial 20: Remove post with post_id 10 using REMOVE_POST [REFERENTIAL - INTEGRITY]
+* Serial 22: Search for post with post_id 4 using FIND_ONE_POST
+* Serial 23: Search for post with post_id 11 using FIND_ONE_POST
+* Serial 24: Search for all posts using FIND_ALL_POSTS
+DTB - 1. should allow duplicate post_content [ENTITY - INTEGRITY]
+DTB - 2. should allow duplicate post_title [ENTITY - INTEGRITY]
+DTB - 3. should delete the post with title JULF Test Post 2 and content Test post 2 for user JULF [REFERENTIAL - INTEGRITY]
+
+### Sad paths — 10
+
+* Serial 1: Test to check response to empty object in CREATE_POST [DTO]
+* Serial 4: Test to create a post with NULL post_title using CREATE_POST [DTO]
+* Serial 5: Test to create a post with NULL post_content using CREATE_POST [DTO]
+* Serial 7: Test to update the post_title of JULF TEST POST to JULF TEST POST<> using UPDATE_POST_TITLE [DTO]
+* Serial 8: Test to update the post_title of JULF TEST POST to empty using UPDATE_POST_TITLE [DTO]
+* Serial 10: Test to update the post_content of JULF TEST POST to Updated test post for user JULF <> using UPDATE_POST_CONTENT [DTO]
+* Serial 11: Test to update the post_content of JULF TEST POST to empty using UPDATE_POST_CONTENT [DTO]
+* Serial 13: Test to update the post_status of JULF TEST POST to empty using UPDATE_POST_STATUS [DTO]
+* Serial 21: Remove post with post_id 8 using REMOVE_POST [REFERENTIAL - INTEGRITY]
+
+### Total
+
+**Happy paths: 15**
+**Sad paths: 9**
+**Total: 24**
+
+I classified the `<>` cases and empty-string cases as DTO sad paths, consistent with your earlier classification.

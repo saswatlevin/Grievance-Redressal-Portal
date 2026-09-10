@@ -1,0 +1,40 @@
+Absolutely. With those five tests classified as DTO sad paths:
+
+### Happy paths — 16
+
+* Serial 2: Test to create a chain with all non-null attributes in CREATE_CHAIN [ENTITY - INTEGRITY]
+* Serial 7: Test to update chain_name to a UPDATE TEST CHAIN in UPDATE_CHAIN_NAME [DTO]
+* Serial 8: Test to update chain_name to Test Chain 1 in UPDATE_CHAIN_NAME [DTO]
+* Serial 9: Test to update chain_name to 1234 in UPDATE_CHAIN_NAME [DTO]
+* Serial 10: Test to update the chain address room_number to 11 in UPDATE_CHAIN_ADDRESS [DTO]
+* Serial 12: Test to update the chain address building to TEST BUILDING in UPDATE_CHAIN_ADDRESS [DTO]
+* Serial 14: Test to update the chain address street to TEST STREET in UPDATE_CHAIN_ADDRESS [DTO]
+* Serial 16: Test to update the chain address city to TEST CITY in UPDATE_CHAIN_ADDRESS [DTO]
+* Serial 18: Test to update the chain address administrative division to TEST DIVISION in UPDATE_CHAIN_ADDRESS [DTO]
+* Serial 20: Test to update the chain address country to United Arab Emirates in UPDATE_CHAIN_ADDRESS [DTO]
+* Serial 22: Test to update the chain address post code to 123456 in UPDATE_CHAIN_ADDRESS [DTO]
+* Serial 24: Test to delete the chain with chain_id 5 in REMOVE_CHAIN [ENTITY - INTEGRITY]
+* DTB 1. should change chain_headquarters_address_room_no of Test Chain to NULL
+* DTB 2. should change chain_headquarters_address_room_no of Test Chain from NULL to 16
+* DTB 3. should change chain_headquarters_address_building of Test Chain to NULL
+* DTB 4. should change chain_headquarters_address_building of Test Chain from NULL to TEST BUILDING
+
+### Sad paths — 13
+
+* Serial 1: Test to check response to empty object in CREATE_CHAIN
+* Serial 3: Test to create a chain with an empty chain_name in CREATE_CHAIN
+* Serial 4: Test to create a chain with an empty chain_headquarters_address_city in CREATE_CHAIN
+* Serial 5: Test to create a chain with an empty chain_headquarters_address_post_code in CREATE_CHAIN
+* Serial 6: Test to check response to empty object in UPDATE_CHAIN_NAME
+* Serial 11: Test to update the chain address room_number to AA in UPDATE_CHAIN_ADDRESS [DTO]
+* Serial 13: Test to update the chain address building to TEST#BUILDING in UPDATE_CHAIN_ADDRESS [DTO]
+* Serial 15: Test to update the chain address street to TEST#STREET in UPDATE_CHAIN_ADDRESS [DTO]
+* Serial 17: Test to update the chain address city to TEST#CITY in UPDATE_CHAIN_ADDRESS [DTO]
+* Serial 19: Test to update the chain address administrative division to TEST#9DIVISION in UPDATE_CHAIN_ADDRESS [DTO]
+* Serial 21: Test to update the chain address country to United8Arab Emirates in UPDATE_CHAIN_ADDRESS [DTO]
+* Serial 23: Test to update the chain address post code to 123-456 in UPDATE_CHAIN_ADDRESS [DTO]
+* Serial 25: Test to delete the chain with chain_id 4 in REMOVE_CHAIN [ENTITY - INTEGRITY]
+* DTB 5. should fail to delete the chain with chain_id 3 because it has related outlets [REFERENTIAL - INTEGRITY]
+* DTB 6. should fail to create another chain named Test Chain because chain_name is unique [REFERENTIAL - INTEGRITY]
+
+**Correction to the count:** Happy paths = **12**, Sad paths = **13**, for **25 total tests**.
