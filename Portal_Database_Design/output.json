@@ -1,0 +1,211 @@
+In displayAllPostComments
+sorted_comments_array  [
+  {
+    comment_id: 1,
+    parent_id: null,
+    comment_date_created_at: 2026-09-06T23:39:26.682Z,
+    comment_content: 'Original Comment',
+    comment_is_deleted: false
+  },
+  {
+    comment_id: 17,
+    parent_id: null,
+    comment_date_created_at: 2026-09-08T06:23:25.396Z,
+    comment_content: 'Reply TWO to Second child-less comment from user_id 8 for post_id 4 with parent_id 15 and comment_id 17',
+    comment_is_deleted: false
+  },
+  {
+    comment_id: 2,
+    parent_id: 1,
+    comment_date_created_at: 2026-09-06T23:39:42.046Z,
+    comment_content: 'Reply ONE to comment with comment_id 1',
+    comment_is_deleted: false
+  },
+  {
+    comment_id: 3,
+    parent_id: 1,
+    comment_date_created_at: 2026-09-06T23:39:54.371Z,
+    comment_content: 'Reply TWO to comment with comment_id 1',
+    comment_is_deleted: false
+  },
+  {
+    comment_id: 6,
+    parent_id: 1,
+    comment_date_created_at: 2026-09-06T23:41:22.216Z,
+    comment_content: 'Reply THREE to comment with comment_id 1',
+    comment_is_deleted: false
+  },
+  {
+    comment_id: 4,
+    parent_id: 2,
+    comment_date_created_at: 2026-09-06T23:41:00.412Z,
+    comment_content: 'Reply ONE to comment with comment_id 2 ',
+    comment_is_deleted: false
+  },
+  {
+    comment_id: 5,
+    parent_id: 2,
+    comment_date_created_at: 2026-09-06T23:41:11.773Z,
+    comment_content: 'Reply TWO to comment with  comment_id 2',
+    comment_is_deleted: false
+  },
+  {
+    comment_id: 8,
+    parent_id: 3,
+    comment_date_created_at: 2026-09-07T00:27:07.496Z,
+    comment_content: 'Reply ONE to comment with comment_id 3',
+    comment_is_deleted: false
+  },
+  {
+    comment_id: 14,
+    parent_id: 4,
+    comment_date_created_at: 2026-09-07T00:28:39.332Z,
+    comment_content: 'Reply ONE to comment with comment_id 4',
+    comment_is_deleted: false
+  }
+]
+Adding a root comment
+comment_map  Map(1) {
+  1 => [
+    {
+      comment_id: 1,
+      parent_id: null,
+      comment_date_created_at: 2026-09-06T23:39:26.682Z,
+      comment_content: 'Original Comment',
+      comment_is_deleted: false
+    }
+  ]
+}
+Adding a root comment
+comment_map  Map(2) {
+  1 => [
+    {
+      comment_id: 1,
+      parent_id: null,
+      comment_date_created_at: 2026-09-06T23:39:26.682Z,
+      comment_content: 'Original Comment',
+      comment_is_deleted: false
+    }
+  ],
+  17 => [
+    {
+      comment_id: 17,
+      parent_id: null,
+      comment_date_created_at: 2026-09-08T06:23:25.396Z,
+      comment_content: 'Reply TWO to Second child-less comment from user_id 8 for post_id 4 with parent_id 15 and comment_id 17',
+      comment_is_deleted: false
+    }
+  ]
+}
+Adding a child comment
+comment_map  Map(2) {
+  1 => [
+    {
+      comment_id: 1,
+      parent_id: null,
+      comment_date_created_at: 2026-09-06T23:39:26.682Z,
+      comment_content: 'Original Comment',
+      comment_is_deleted: false
+    },
+    {
+      comment_id: 2,
+      parent_id: 1,
+      comment_date_created_at: 2026-09-06T23:39:42.046Z,
+      comment_content: 'Reply ONE to comment with comment_id 1',
+      comment_is_deleted: false
+    }
+  ],
+  17 => [
+    {
+      comment_id: 17,
+      parent_id: null,
+      comment_date_created_at: 2026-09-08T06:23:25.396Z,
+      comment_content: 'Reply TWO to Second child-less comment from user_id 8 for post_id 4 with parent_id 15 and comment_id 17',
+      comment_is_deleted: false
+    }
+  ]
+}
+Adding a child comment
+comment_map  Map(2) {
+  1 => [
+    {
+      comment_id: 1,
+      parent_id: null,
+      comment_date_created_at: 2026-09-06T23:39:26.682Z,
+      comment_content: 'Original Comment',
+      comment_is_deleted: false
+    },
+    {
+      comment_id: 2,
+      parent_id: 1,
+      comment_date_created_at: 2026-09-06T23:39:42.046Z,
+      comment_content: 'Reply ONE to comment with comment_id 1',
+      comment_is_deleted: false
+    },
+    {
+      comment_id: 3,
+      parent_id: 1,
+      comment_date_created_at: 2026-09-06T23:39:54.371Z,
+      comment_content: 'Reply TWO to comment with comment_id 1',
+      comment_is_deleted: false
+    }
+  ],
+  17 => [
+    {
+      comment_id: 17,
+      parent_id: null,
+      comment_date_created_at: 2026-09-08T06:23:25.396Z,
+      comment_content: 'Reply TWO to Second child-less comment from user_id 8 for post_id 4 with parent_id 15 and comment_id 17',
+      comment_is_deleted: false
+    }
+  ]
+}
+Adding a child comment
+comment_map  Map(2) {
+  1 => [
+    {
+      comment_id: 1,
+      parent_id: null,
+      comment_date_created_at: 2026-09-06T23:39:26.682Z,
+      comment_content: 'Original Comment',
+      comment_is_deleted: false
+    },
+    {
+      comment_id: 2,
+      parent_id: 1,
+      comment_date_created_at: 2026-09-06T23:39:42.046Z,
+      comment_content: 'Reply ONE to comment with comment_id 1',
+      comment_is_deleted: false
+    },
+    {
+      comment_id: 3,
+      parent_id: 1,
+      comment_date_created_at: 2026-09-06T23:39:54.371Z,
+      comment_content: 'Reply TWO to comment with comment_id 1',
+      comment_is_deleted: false
+    },
+    {
+      comment_id: 6,
+      parent_id: 1,
+      comment_date_created_at: 2026-09-06T23:41:22.216Z,
+      comment_content: 'Reply THREE to comment with comment_id 1',
+      comment_is_deleted: false
+    }
+  ],
+  17 => [
+    {
+      comment_id: 17,
+      parent_id: null,
+      comment_date_created_at: 2026-09-08T06:23:25.396Z,
+      comment_content: 'Reply TWO to Second child-less comment from user_id 8 for post_id 4 with parent_id 15 and comment_id 17',
+      comment_is_deleted: false
+    }
+  ]
+}
+Adding a child comment
+[Nest] 3091  - 13/09/2026, 1:14:07 am   ERROR [ExceptionsHandler] TypeError: Cannot read properties of undefined (reading 'push')
+    at CommentsService.displayAllPostComments (/home/saswat/Desktop/Grievance_Redressal_Portal/grievance_redressal_portal/src/comments/comments.service.ts:79:50)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /home/saswat/Desktop/Grievance_Redressal_Portal/grievance_redressal_portal/node_modules/@nestjs/core/router/router-execution-context.js:47:62
+    at async /home/saswat/Desktop/Grievance_Redressal_Portal/grievance_redressal_portal/node_modules/@nestjs/core/router/router-proxy.js:9:17
+
