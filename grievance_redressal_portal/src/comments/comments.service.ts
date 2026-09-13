@@ -113,11 +113,11 @@ export class CommentsService {
             //console.log("Key:", parentId, ":::", " Comments:", comments);
           //});
 
-        // Sorting the comments in each map array in descending order of time (oldest to newest). 
+        // Sorting the comments in each map array in ascending order of time (oldest to newest). 
          comment_map.forEach((comments) => {
             comments.sort((a, b) => {
-              // Here since b - a > 0, so b gets put before a.
-              return b.comment_date_created_at.getTime() - a.comment_date_created_at.getTime();
+              // Here since a - b < 0, so a gets put before b.
+              return a.comment_date_created_at.getTime() - b.comment_date_created_at.getTime();
             });
           });
 
