@@ -5,6 +5,7 @@ import { UpdateCommentContentDto } from './dto/update-comment-content.dto';
 import { SoftDeleteCommentDto } from './dto/soft-delete-comment.dto';
 import { SearchCommentsByPostDto } from './dto/search-comments-by-post.dto';
 import { CreateReplyDto } from './dto/create-reply.dto';
+import { arrayToTree } from "@okutils/array-to-tree";
 
 @Injectable()
 export class CommentsService {
@@ -91,8 +92,8 @@ export class CommentsService {
                 // If the parent comment was found, create a new array
                 // containing the parent and the current child.
                 if (parent_comment !== undefined) {
-                  console.log("Adding a child comment that is a reply to a root comment as a k-v pair with a copy of that parent comment.");
-                  comment_map.set(current_parent_id, [parent_comment, comment]);
+                  console.log("Adding a child comment that is a reply to a root comment as a k-v pair");
+                  comment_map.set(current_parent_id, [comment]);
                 }
             }
             
@@ -104,14 +105,10 @@ export class CommentsService {
               comment_map.get(current_parent_id)!.push(comment);
             }
           }
-            //console.log("comment_map ", comment_map);
     
           }
 
-          //console.log("Completed comment_map ");
-          //comment_map.forEach((comments, parentId) => {
-            //console.log("Key:", parentId, ":::", " Comments:", comments);
-          //});
+          
 
         // Sorting the comments in each map array in ascending order of time (oldest to newest). 
          comment_map.forEach((comments) => {
@@ -121,12 +118,59 @@ export class CommentsService {
             });
           });
 
-          console.log("Sorted comment_map ");
-          comment_map.forEach((comments, parentId) => {
+          //console.log("Sorted comment_map ");
+          /*comment_map.forEach((comments, parentId) => {
             console.log("Key:", parentId, ":::", " Comments:", comments);
+          });*/
+
+          /*console.dir(comment_map, {
+            depth: null,
+            colors: true
+          });*/
+
+          var flattened_comment_array: Comment[] = [];
+          const comment_map_keys = [...comment_map.keys()];
+          var comments_bucket_length = -1;
+          var flattening_index = 0;
+          
+          for (let i = 0; i < comment_map_keys.length; ++i) {
+            var comment_map_key = comment_map_keys[i];
+            var comments_bucket  = comment_map.get(comment_map_key); 
+            
+            if (comments_bucket !== undefined) {
+               comments_bucket_length = comments_bucket.length;
+            }
+
+           
+            for (let j = 0; j < comments_bucket_length; ++j) {
+              if (comments_bucket !== undefined) {
+                flattened_comment_array[flattening_index] = comments_bucket[j];
+                flattening_index = flattening_index + 1
+              }
+              
+            }
+            //console.log("comments_bucket ", comments_bucket);
+            
+          }
+          
+          console.log("flattened_comment_array ", flattened_comment_array);
+
+          console.log("######################################################");
+          console.log("\n\n");
+          
+          const comment_tree = arrayToTree(flattened_comment_array, {
+            customId: "comment_id",
+            parentId: "parent_id",
+            childrenId: "replies"
+          });
+
+          console.log("comment_tree ");
+          console.dir(comment_tree, {
+            depth: null,
+            colors: true
           });
           
-          return [];
+          return comment_tree;
         
       }
 
