@@ -3,6 +3,7 @@ import { UpdateChainNameDto } from './dto/update-chain-name.dto';
 import { ChainsService } from './chains.service';
 import { CreateChainDto } from './dto/create-chain.dto';
 import { UpdateChainAddressDto } from './dto/update-chain-address.dto';
+import { SearchChainsByNameDto } from './dto/search-chain-name.dto';
 
 @Controller('chains')
 export class ChainsController {
@@ -23,6 +24,12 @@ export class ChainsController {
   findOneChain(@Param('id', ParseIntPipe) id: number) {
     console.log("In findOneChain");
     return this.chainsService.findOneChain(id);
+  }
+
+  @Get('search_chains_by_name/')
+  searchChainsByName(@Body() searchChainsByNameDto: SearchChainsByNameDto) {
+    console.log("In searchChainsByName");
+    return this.chainsService.searchChainsByName(searchChainsByNameDto);
   }
 
 @Patch('update_chain_name/:id')

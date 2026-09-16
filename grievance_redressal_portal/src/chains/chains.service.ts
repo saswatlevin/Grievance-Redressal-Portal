@@ -3,6 +3,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { CreateChainDto } from './dto/create-chain.dto';
 import { UpdateChainAddressDto } from './dto/update-chain-address.dto';
 import { UpdateChainNameDto } from './dto/update-chain-name.dto';
+import { SearchChainsByNameDto } from './dto/search-chain-name.dto';
 
 @Injectable()
 export class ChainsService {
@@ -40,6 +41,14 @@ export class ChainsService {
       chain_id: id,
     },
   });
+  }
+
+  async searchChainsByName(searchChainsByNameDto: SearchChainsByNameDto) {
+    return this.prisma.$queryRaw`
+    SELECT chain_name
+    FROM chains
+    WHERE chain_name ILIKE ${'%' + searchChainsByNameDto.chain_name + '%'};
+  `;
   }
 
   async updateChainAddress(chainId: number, 
