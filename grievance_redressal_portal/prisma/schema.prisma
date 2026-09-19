@@ -68,6 +68,7 @@ enum UserRole {
   company_manager
   restaurant_employee
   restaurant_manager
+  chain_manager
 
   @@map("user_role_enum")
 }
